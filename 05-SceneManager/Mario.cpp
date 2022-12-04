@@ -429,6 +429,8 @@ void CMario::Render()
 	else if (level == MARIO_LEVEL_BIG) {
 		aniId = GetAniIdBig();
 	}
+	else if (level == MARIO_LEVEL_TAIL)
+		aniId = GetAniIdTail();
 
 	if (isSitting) {
 		animation_set->at(aniId)->Render(x, y + 5);

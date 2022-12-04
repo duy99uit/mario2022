@@ -5,6 +5,8 @@
 
 #include "debug.h"
 
+#include "Tail.h"
+
 #define MARIO_WALKING_SPEED		0.05f
 #define MARIO_RUNNING_SPEED		0.1f
 #define MARIO_SPEED_MAX				0.25f
@@ -112,6 +114,7 @@
 
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
+#define	MARIO_LEVEL_TAIL	3
 
 #define MARIO_BIG_BBOX_WIDTH  15
 #define MARIO_BIG_BBOX_HEIGHT 21
@@ -182,6 +185,7 @@ class CMario : public CGameObject
 	int GetAniIdSmall();
 	int GetAniIdTail();
 
+
 public:
 	// for mario hold and kick koopas
 	BOOLEAN isReadyToHold = false;
@@ -189,6 +193,8 @@ public:
 	BOOLEAN isOnPlatform;
 	BOOLEAN isFlapping = false;
 	BOOLEAN isKick = false;
+
+	CTail* tail = NULL;
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{
@@ -203,6 +209,7 @@ public:
 		untouchable_start = -1;
 		isOnPlatform = false;
 		coin = 0;
+		tail = new CTail(180, y);
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
