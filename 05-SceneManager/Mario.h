@@ -180,6 +180,7 @@ class CMario : public CGameObject
 
 	int GetAniIdBig();
 	int GetAniIdSmall();
+	int GetAniIdTail();
 
 public:
 	// for mario hold and kick koopas
