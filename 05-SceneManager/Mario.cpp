@@ -319,6 +319,29 @@ int CMario::GetAniIdBig()
 				aniId = MARIO_ANI_BIG_WALKING_FAST_LEFT;
 		}
 	}
+	if (state == MARIO_STATE_JUMP || state == MARIO_STATE_RELEASE_JUMP) {
+		if (nx > 0) {
+			aniId = MARIO_ANI_BIG_JUMPINGUP_RIGHT;
+			if (isHolding) {
+				aniId = MARIO_ANI_BIG_HOLD_JUMPINGUP_RIGHT;
+			}
+			else if (isKick)
+			{
+				aniId = MARIO_ANI_BIG_KICKING_RIGHT;
+
+			}
+		}
+		if (nx < 0) {
+			aniId = MARIO_ANI_BIG_JUMPINGUP_LEFT;
+			if (isHolding) {
+				aniId = MARIO_ANI_BIG_HOLD_JUMPINGUP_LEFT;
+			}
+			else if (isKick)
+			{
+				aniId = MARIO_ANI_BIG_KICKING_LEFT;
+			}
+		}
+	}
 	else
 		if (isSitting)
 		{
