@@ -50,6 +50,7 @@ public:
 
 	void startPushedUp();
 	void stopPushedUp();
+	virtual bool getIsPushingUp() { return isPushingUp;};
 
 
 };

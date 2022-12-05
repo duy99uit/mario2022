@@ -159,7 +159,11 @@ void CMario::OnCollisionWithQuestionBrick(LPCOLLISIONEVENT e)
 	if (e->ny > 0) {
 		DebugOut(L"OnCollisionWithQuestionBrick SetState!\n");
 		vy = 0;
-		questionBrick->SetState(QUESTION_BRICK_HIT);
+		if (questionBrick->getIsPushingUp()) return;
+		else {
+			questionBrick->SetState(QUESTION_BRICK_HIT);
+		}
+		
 	}
 }
 
