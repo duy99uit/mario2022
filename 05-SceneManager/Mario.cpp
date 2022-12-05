@@ -48,6 +48,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	isOnPlatform = false;
 	HandleMarioJump();
+	HandleMarioKick();
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -619,6 +620,14 @@ void CMario::HandleMarioJump() {
 			}
 		}
 
+	}
+}
+void CMario::HandleMarioKick() {
+	if (isKick) {
+		if (GetTickCount64() - start_kicking > MARIO_KICKING_TIME) {
+			StopKick();
+			SetState(MARIO_STATE_IDLE);
+		}
 	}
 }
 void CMario::HandleMarioDie() {

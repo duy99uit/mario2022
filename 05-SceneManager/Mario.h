@@ -20,6 +20,7 @@
 #define MARIO_GRAVITY			0.002f
 
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
+#define MARIO_KICKING_TIME			200
 
 #define MARIO_STATE_DIE				-10
 #define MARIO_STATE_IDLE			0
@@ -233,8 +234,13 @@ public:
 	int GetLevel() {return this->level;}
 
 	void StartKicking() { start_kicking = GetTickCount64(); isKick = true; }
+
 	//Handle mario behavior
 	void HandleMarioJump();
+
+	// kick
+	void HandleMarioKick();
+	void StopKick() { start_kicking = 0; isKick = false; }
 
 	// Not jumping
 	void pullDown() {
