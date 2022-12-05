@@ -245,16 +245,38 @@ int CMario::GetAniIdSmall()
 		if (abs(ax) == MARIO_ACCEL_RUN_X)
 		{
 			if (nx >= 0)
-				aniId = MARIO_ANI_SMALL_RUNNING_RIGHT;
+				aniId = MARIO_ANI_SMALL_JUMPINGUP_RIGHT;
 			else
-				aniId = MARIO_ANI_SMALL_RUNNING_LEFT;
+				aniId = MARIO_ANI_SMALL_JUMPINGUP_LEFT;
 		}
 		else
 		{
 			if (nx >= 0)
-				aniId = MARIO_ANI_SMALL_WALKING_FAST_RIGHT;
+				aniId = MARIO_ANI_SMALL_JUMPINGUP_RIGHT;
 			else
-				aniId = MARIO_ANI_SMALL_WALKING_FAST_LEFT;
+				aniId = MARIO_ANI_SMALL_JUMPINGUP_LEFT;
+		}
+	}
+	if (state == MARIO_STATE_JUMP || state == MARIO_STATE_RELEASE_JUMP || isHolding || isKick) {
+		if (nx > 0) {
+			aniId = MARIO_ANI_SMALL_JUMPINGUP_RIGHT;
+			if (isHolding) {
+				aniId = MARIO_ANI_SMALL_HOLD_RUNNING_RIGHT;
+			}
+			else if (isKick)
+			{
+				aniId = MARIO_ANI_SMALL_KICKING_RIGHT;
+			}
+		}
+		if (nx < 0) {
+			aniId = MARIO_ANI_SMALL_JUMPINGUP_LEFT;
+			if (isHolding) {
+				aniId = MARIO_ANI_SMALL_HOLD_RUNNING_LEFT;
+			}
+			else if (isKick)
+			{
+				aniId = MARIO_ANI_SMALL_KICKING_LEFT;
+			}
 		}
 	}
 	else
@@ -268,8 +290,18 @@ int CMario::GetAniIdSmall()
 		else
 			if (vx == 0)
 			{
-				if (nx > 0) aniId = MARIO_ANI_SMALL_IDLE_RIGHT;
-				else aniId = MARIO_ANI_SMALL_IDLE_LEFT;
+				if (nx > 0) {
+					aniId = MARIO_ANI_SMALL_IDLE_RIGHT;
+					if (isKick) {
+						aniId = MARIO_ANI_SMALL_KICKING_RIGHT;
+					}
+				}
+				else {
+					aniId = MARIO_ANI_SMALL_IDLE_LEFT;
+					if (isKick) {
+						aniId = MARIO_ANI_SMALL_KICKING_LEFT;
+					}
+				}
 			}
 			else if (vx > 0)
 			{
@@ -277,8 +309,11 @@ int CMario::GetAniIdSmall()
 					aniId = MARIO_ANI_SMALL_BRAKING_RIGHT;
 				else if (ax == MARIO_ACCEL_RUN_X)
 					aniId = MARIO_ANI_SMALL_RUNNING_RIGHT;
-				else if (ax == MARIO_ACCEL_WALK_X)
+				else if (ax == MARIO_ACCEL_WALK_X) {
 					aniId = MARIO_ANI_SMALL_WALKING_RIGHT;
+				}
+
+
 			}
 			else // vx < 0
 			{
@@ -288,6 +323,7 @@ int CMario::GetAniIdSmall()
 					aniId = MARIO_ANI_SMALL_RUNNING_LEFT;
 				else if (ax == -MARIO_ACCEL_WALK_X)
 					aniId = MARIO_ANI_SMALL_WALKING_LEFT;
+
 			}
 
 	if (aniId == -1) aniId = MARIO_ANI_SMALL_IDLE_RIGHT;
