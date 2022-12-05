@@ -353,8 +353,24 @@ int CMario::GetAniIdBig()
 		else
 			if (vx == 0)
 			{
-				if (nx > 0) aniId = MARIO_ANI_BIG_IDLE_RIGHT;
-				else aniId = MARIO_ANI_BIG_IDLE_LEFT;
+				if (nx > 0) {
+					aniId = MARIO_ANI_BIG_IDLE_RIGHT;
+					if (isKick) {
+						aniId = MARIO_ANI_BIG_KICKING_RIGHT;
+					}
+					if (isHolding) {
+						aniId = MARIO_ANI_BIG_HOLD_IDLE_RIGHT;
+					}
+				}
+				else {
+					aniId = MARIO_ANI_BIG_IDLE_LEFT;
+					if (isKick) {
+						aniId = MARIO_ANI_BIG_KICKING_LEFT;
+					}
+					if (isHolding) {
+						aniId = MARIO_ANI_BIG_HOLD_IDLE_LEFT;
+					}
+				}
 			}
 			else if (vx > 0)
 			{
