@@ -406,10 +406,30 @@ int CMario::GetAniIdBig()
 			{
 				if (ax > 0)
 					aniId = MARIO_ANI_BIG_BRAKING_LEFT;
-				else if (ax == -MARIO_ACCEL_RUN_X)
+				else if (ax == -MARIO_ACCEL_RUN_X) {
 					aniId = MARIO_ANI_BIG_RUNNING_LEFT;
+					if (isHolding) {
+						aniId = MARIO_ANI_BIG_HOLD_RUNNING_LEFT;
+					}
+				}
 				else if (ax == -MARIO_ACCEL_WALK_X)
+				{
 					aniId = MARIO_ANI_BIG_WALKING_LEFT;
+					if (isHolding) {
+						aniId = MARIO_ANI_BIG_HOLD_WALKING_LEFT;
+					}
+				}
+
+				if (!isOnPlatform) {
+					aniId = MARIO_ANI_BIG_JUMPINGUP_LEFT;
+					if (isHolding) {
+						aniId = MARIO_ANI_BIG_HOLD_JUMPINGUP_LEFT;
+					}
+				}
+
+				if (isKick) {
+					aniId = MARIO_ANI_BIG_KICKING_LEFT;
+				}
 			}
 
 	if (aniId == -1) aniId = MARIO_ANI_BIG_IDLE_RIGHT;
