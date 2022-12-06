@@ -170,6 +170,9 @@
 #define MARIO_SPRITE_WHACK_RIGHT_3_ID	12805
 #define MARIO_SPRITE_WHACK_RIGHT_4_ID	12806
 
+#define MARIO_TURNING_STATE_TIME	70
+#define MARIO_TURNING_TAIL_TIME		350
+
 
 class CMario : public CGameObject
 {
@@ -263,6 +266,9 @@ public:
 	// kick
 	void HandleMarioKick();
 	void StopKick() { start_kicking = 0; isKick = false; }
+
+	// turning
+	void HandleTurning();
 
 	// Not jumping
 	void pullDown() {
