@@ -329,6 +329,7 @@ int CMario::GetAniIdSmall()
 					aniId = MARIO_ANI_SMALL_RUNNING_LEFT;
 				else if (ax == -MARIO_ACCEL_WALK_X)
 					aniId = MARIO_ANI_SMALL_WALKING_LEFT;
+
 				if (!isOnPlatform) {
 					aniId = MARIO_ANI_SMALL_JUMPINGUP_LEFT;
 				}
@@ -579,6 +580,26 @@ void CMario::Render()
 	if (isSitting) {
 		animation_set->at(aniId)->Render(x, y + 5);
 	}
+	else if (level == MARIO_LEVEL_TAIL) {
+		if (state == MARIO_STATE_TAIL_ATTACK)
+		{
+			DebugOut(L"[Turning stack]:: %d\n", turningStack);
+			if (isTuring && nx > 0) {
+				if (turningStack == 1 || turningStack == 5) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_RIGHT_1_ID)->Draw(x, y);
+				if (turningStack == 2) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_RIGHT_2_ID)->Draw(x, y);
+				if (turningStack == 3) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_RIGHT_3_ID)->Draw(x, y);
+				if (turningStack == 4) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_RIGHT_4_ID)->Draw(x, y);
+			}
+			if (isTuring && nx < 0) {
+				if (turningStack == 1 || turningStack == 5) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_LEFT_1_ID)->Draw(x, y);
+				if (turningStack == 2) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_LEFT_2_ID)->Draw(x, y);
+				if (turningStack == 3) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_LEFT_3_ID)->Draw(x, y);
+				if (turningStack == 4) CSprites::GetInstance()->Get(MARIO_SPRITE_WHACK_LEFT_4_ID)->Draw(x, y);
+			}
+		}
+
+		else animation_set->at(aniId)->Render(nx > 0 ? x - MARIO_DIFF : x + MARIO_DIFF, y);
+	}
 	else {
 		animation_set->at(aniId)->Render(x, y);
 	}
@@ -672,8 +693,13 @@ void CMario::SetState(int state)
 	case MARIO_STATE_KICK:
 		StartKicking();
 		break;
+	case MARIO_STATE_TAIL_ATTACK:
+		if (!isTuring) {
+			turningStack = 0;
+			StartTurning();
+		}
+		break;
 	}
-
 
 	CGameObject::SetState(state);
 }

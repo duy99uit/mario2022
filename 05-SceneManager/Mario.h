@@ -157,6 +157,19 @@
 #define MARIO_ANI_TAIL_BRAKING_LEFT			44
 #define MARIO_ANI_TAIL_SITTING_LEFT			45
 
+#define MARIO_STATE_TAIL_ATTACK		14
+#define MARIO_DIFF	3
+
+#define MARIO_SPRITE_WHACK_LEFT_1_ID	12813
+#define MARIO_SPRITE_WHACK_LEFT_2_ID	12814
+#define MARIO_SPRITE_WHACK_LEFT_3_ID	12815
+#define MARIO_SPRITE_WHACK_LEFT_4_ID	12816
+
+#define MARIO_SPRITE_WHACK_RIGHT_1_ID	12803
+#define MARIO_SPRITE_WHACK_RIGHT_2_ID	12804
+#define MARIO_SPRITE_WHACK_RIGHT_3_ID	12805
+#define MARIO_SPRITE_WHACK_RIGHT_4_ID	12806
+
 
 class CMario : public CGameObject
 {
@@ -170,6 +183,9 @@ class CMario : public CGameObject
 	ULONGLONG untouchable_start;
 	ULONGLONG start_kicking = 0;
 	BOOLEAN isJumping = false;
+
+	ULONGLONG start_turning_state = 0;
+	ULONGLONG start_turning = 0;
 
 
 	int coin;
@@ -194,6 +210,9 @@ public:
 	BOOLEAN isOnPlatform;
 	BOOLEAN isFlapping = false;
 	BOOLEAN isKick = false;
+	// tail attack
+	BOOLEAN isTuring = false;
+	int turningStack = 0;
 
 	CTail* tail = NULL;
 
@@ -234,6 +253,9 @@ public:
 	int GetLevel() {return this->level;}
 
 	void StartKicking() { start_kicking = GetTickCount64(); isKick = true; }
+
+	//tail
+	void StartTurning() { start_turning_state = GetTickCount64(); isTuring = true; }
 
 	//Handle mario behavior
 	void HandleMarioJump();
