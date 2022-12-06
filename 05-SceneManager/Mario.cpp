@@ -21,6 +21,10 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
+
+	HandleMarioJump();
+	HandleMarioKick();
+
 	for (int i = 0; i < coObjects->size(); i++)
 	{
 		LPGAMEOBJECT obj = coObjects->at(i);
@@ -47,8 +51,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 	isOnPlatform = false;
-	HandleMarioJump();
-	HandleMarioKick();
+	
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
