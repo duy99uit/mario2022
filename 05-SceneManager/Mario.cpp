@@ -804,12 +804,12 @@ void CMario::HandleMarioDie() {
 }
 void CMario::HandleTurning() {
 
-	if (GetTickCount64() - start_turning >= MARIO_TURNING_STATE_TIME) {
+	if (GetTickCount64() - start_turning >= MARIO_TURNING_STATE_TIME && isTuring) {
 		start_turning = GetTickCount64();
 		turningStack++;
 		DebugOut(L"Handle turning:: %d \n", turningStack);
 	}
-	if (GetTickCount64() - start_turning_state > MARIO_TURNING_TAIL_TIME) {
+	if (GetTickCount64() - start_turning_state > MARIO_TURNING_TAIL_TIME && isTuring) {
 		isTuring = false;
 		start_turning_state = 0;
 		start_turning = 0;

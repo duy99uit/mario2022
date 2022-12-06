@@ -98,5 +98,5 @@ void CSampleKeyHandler::KeyState(BYTE* states)
 		}
 	}
 	else
-		mario->SetState(MARIO_STATE_IDLE);
+		if (!mario->isTuring) mario->SetState(MARIO_STATE_IDLE);
 }
