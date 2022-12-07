@@ -167,6 +167,12 @@ void CGoomba::SetState(int state)
 	case GOOMBA_STATE_RED_JUMPING:
 		ay = -GOOMBA_GRAVITY;
 		break;
+	case GOOMBA_STATE_DIE_BY_MARIO:
+		vy = -GOOMBA_DIE_DEFLECT_SPEED;
+		vx = -vx;
+		ay = GOOMBA_GRAVITY;
+		die_start = GetTickCount64();
+		break;
 	case GOOMBA_STATE_RED_HIGHJUMPING:
 		ay = -GOOMBA_GRAVITY;
 		break;
