@@ -203,13 +203,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 			}
 		}
 		else {
-			if (MARIO_LEVEL_BIG) {
-				SetLevel(MARIO_LEVEL_SMALL);
-			}
-			else {
-				DebugOut(L"Mario die by koopas \n");
-				//SetState(MARIO_STATE_DIE);
-			}
+			HandleMarioDie();
 		}
 	}
 	else if (e->ny != 0) {
