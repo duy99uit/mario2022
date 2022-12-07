@@ -103,7 +103,7 @@ void QuestionBrick::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	float mLeft, mTop, mRight, mBottom;
 	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
-	if (mario != NULL &&  state != QUESTION_BRICK_HIT) {
+	if (mario != NULL && totalItems > 0 && state != QUESTION_BRICK_HIT && mario->isTuring) {
 		mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
 		if (isColliding(mLeft, mTop, mRight, mBottom)) {
 			//DebugOut(L"Mario tail hit qBrick \n");
