@@ -21,7 +21,7 @@ void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			if (mario->turningStack == 1 || mario->turningStack == 5)
 				x = mario->x - TAIL_BBOX_WIDTH;
 			else if (mario->turningStack == 3)
-				x = mario->x + MARIO_BIG_BBOX_WIDTH;
+				x = mario->x + MARIO_BIG_BBOX_WIDTH + 4;
 			else x = mario->x - 8;
 		}
 		else
@@ -30,7 +30,7 @@ void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				x = mario->x + MARIO_BIG_BBOX_WIDTH;
 			else if (mario->turningStack == 3)
 				x = mario->x - TAIL_BBOX_WIDTH;
-			else x = mario->x + MARIO_BIG_BBOX_WIDTH;
+			else x = mario->x + MARIO_BIG_BBOX_WIDTH + 4;
 		}
 		y = mario->y + TAIL_BBOX_WIDTH * 2 + 1;
 	}
