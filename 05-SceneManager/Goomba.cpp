@@ -128,6 +128,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				nx = mario->nx;
 				DebugOut(L"goomba red turn level by mario tail \n");
+				SetTagType(GOOMBA_RED_NORMAL);
 				SetState(GOOMBA_STATE_DIE_BY_MARIO);
 				return;
 			}
