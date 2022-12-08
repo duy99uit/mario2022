@@ -70,6 +70,18 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	HandleCanBeHeld(mario);
 
+	// mario tail collision with koopas
+	float mLeft, mTop, mRight, mBottom;
+	if (mario != NULL) {
+		if (mario->isTuring && mario->GetLevel() == MARIO_LEVEL_TAIL) {
+			mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
+			if (isColliding(floor(mLeft), floor(mTop), ceil(mRight), ceil(mBottom))) {
+				DebugOut(L"Mario tail collision with koopas \n");
+				SetState(KOOPAS_STATE_SHELL_UP);
+			}
+		}
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -300,7 +312,7 @@ void CKoopas::SetState(int state)
 	case KOOPAS_STATE_SHELL_UP:
 		// shell up and then walking
 		vy = -KOOPAS_SHELL_DEFLECT_SPEED;
-		vx = KOOPAS_WALKING_SPEED;
+		vx = 0;
 		nx = 1;
 		StartShell();
 		break;
