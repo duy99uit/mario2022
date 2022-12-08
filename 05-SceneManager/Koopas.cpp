@@ -248,7 +248,7 @@ void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& botto
 	left = x;
 	top = y;
 	right = x + KOOPAS_BBOX_WIDTH;
-	if (state == KOOPAS_STATE_IN_SHELL || state == KOOPAS_STATE_TURNING) {
+	if (state == KOOPAS_STATE_IN_SHELL || state == KOOPAS_STATE_TURNING || state == KOOPAS_STATE_SHELL_UP) {
 		bottom = y + KOOPAS_BBOX_SHELL_HEIGHT;
 	}
 	else {
