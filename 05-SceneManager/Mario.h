@@ -175,6 +175,7 @@
 
 // FLY
 #define MARIO_SPEED_STACK			0.05f
+#define MARIO_FLYING_TIME			1750
 
 
 class CMario : public CGameObject
@@ -185,6 +186,7 @@ class CMario : public CGameObject
 	// handle mario fly
 	bool isRunning = false;
 	bool isReadyToRun = false;
+	ULONGLONG fly_start = 0;
 
 	int level;
 	int untouchable;
@@ -271,6 +273,7 @@ public:
 
 	//tail
 	void StartTurning() { start_turning_state = GetTickCount64(); isTuring = true; }
+	void StartFlying() { fly_start = GetTickCount64(); }
 
 	//Handle mario behavior
 	void HandleMarioJump();
@@ -281,6 +284,7 @@ public:
 
 	// turning
 	void HandleTurning();
+	void HandleFlying();
 
 	// Not jumping
 	void pullDown() {

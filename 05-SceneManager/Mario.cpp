@@ -25,6 +25,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	HandleMarioJump();
 	HandleMarioKick();
+	HandleFlying();
 
 	for (int i = 0; i < coObjects->size(); i++)
 	{
@@ -690,6 +691,7 @@ void CMario::SetState(int state)
 			if (level == MARIO_LEVEL_TAIL) {
 				DebugOut(L"mario can fly \n");
 				isFlying = true;
+				StartFlying();
 			}
 			else {
 				DebugOut(L"mario not tail \n");
@@ -856,4 +858,16 @@ void CMario::HandleTurning() {
 		turningStack = 0;
 	}
 
+}
+
+void CMario::HandleFlying() {
+
+	// handle fly
+	if (GetTickCount64() - fly_start > MARIO_FLYING_TIME && fly_start != 0 && isFlying)
+	{
+		DebugOut(L"Start fly \n");
+		fly_start = 0;
+		isRunning = false;
+		isFlying = false;
+	}
 }
