@@ -632,24 +632,44 @@ void CMario::SetState(int state)
 		maxVx = MARIO_RUNNING_SPEED;
 		ax = MARIO_ACCEL_RUN_X;
 		nx = 1;
+		// handle fly here
+		isReadyToRun = true;
+		if (vx > MARIO_SPEED_STACK && isReadyToRun) {
+			isRunning = true;
+		}
+		else {
+			isRunning = false;
+		}
 		break;
 	case MARIO_STATE_RUNNING_LEFT:
 		if (isSitting) break;
 		maxVx = -MARIO_RUNNING_SPEED;
 		ax = -MARIO_ACCEL_RUN_X;
 		nx = -1;
+		// handle fly here
+		isReadyToRun = true;
+		if (vx < MARIO_SPEED_STACK && isReadyToRun) {
+			isRunning = true;
+		}
+		else {
+			isRunning = false;
+		}
 		break;
 	case MARIO_STATE_WALKING_RIGHT:
 		if (isSitting) break;
 		maxVx = MARIO_WALKING_SPEED;
 		ax = MARIO_ACCEL_WALK_X;
 		nx = 1;
+		// handle fly here
+		isRunning = false;
 		break;
 	case MARIO_STATE_WALKING_LEFT:
 		if (isSitting) break;
 		maxVx = -MARIO_WALKING_SPEED;
 		ax = -MARIO_ACCEL_WALK_X;
 		nx = -1;
+		// handle fly
+		isRunning = false;
 		break;
 	case MARIO_STATE_JUMP:
 		if (isSitting) break;

@@ -173,13 +173,18 @@
 #define MARIO_TURNING_STATE_TIME	70
 #define MARIO_TURNING_TAIL_TIME		350
 
+// FLY
+#define MARIO_SPEED_STACK			0.05f
+
 
 class CMario : public CGameObject
 {
 	BOOLEAN isSitting;
 	float maxVx;
-	float ax;				// acceleration on x 
-	float ay;				// acceleration on y 
+
+	// handle mario fly
+	bool isRunning = false;
+	bool isReadyToRun = false;
 
 	int level;
 	int untouchable;
@@ -216,6 +221,12 @@ public:
 	BOOLEAN isKick = false;
 	// tail attack
 	BOOLEAN isTuring = false;
+
+	// handle mario fly
+	BOOLEAN isFlying = false;
+	BOOLEAN isFlappingFlying = false;
+	float ax;				// acceleration on x 
+	float ay;				// acceleration on y
 	int turningStack = 0;
 
 	CTail* tail = NULL;

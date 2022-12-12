@@ -16,14 +16,7 @@ using namespace std;
 class CGameObject
 {
 protected:
-
 	
-
-	/*float vx;*/
-	float vy;
-
-	/*int nx;*/
-
 	int state;
 
 	bool isDeleted;
@@ -47,6 +40,7 @@ public:
 	float y;
 	int nx;
 	float vx;
+	float vy;
 
 
 	int tagType = 0;
