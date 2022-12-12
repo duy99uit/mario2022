@@ -16,28 +16,16 @@ void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt);
 	y += vy * dt;
-	/*y = limitY;*/
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
+	y = limitY;
 
-	coEvents.clear();
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-
+	float mLeft, mTop, mRight, mBottom;
 	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
-	if (mario != NULL) {
-		float mLeft, mTop, mRight, mBottom;
-		float mWidth = mario->GetWidth();
-		mario->GetBoundingBox(mLeft, mTop, mRight, mBottom);
-		if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom)) {
-			if (mario->GetLevel() != MARIO_LEVEL_SMALL)
-			{
-				mario->SetLevel(mario->GetLevel() - 1);
-			}
-			else
-			{
-				DebugOut(L" Mario DIE  \n");
-				/*mario->SetState(MARIO_STATE_DIE);*/
-			}
+	if (mario->GetLevel() == MARIO_LEVEL_TAIL) {
+		mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
+
+		if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom) && mario->isTuring) {
+			DebugOut(L"PiranhaPlantFire die by mario tail \n");
+		
 		}
 	}
 }
