@@ -684,6 +684,18 @@ void CMario::SetState(int state)
 			ay = -MARIO_ACCELERATION_JUMP;
 			isJumping = true;
 		}
+
+		// handle fly
+		if (isRunning) {
+			if (level == MARIO_LEVEL_TAIL) {
+				DebugOut(L"mario can fly \n");
+				isFlying = true;
+			}
+			else {
+				DebugOut(L"mario not tail \n");
+			}
+		}
+
 		isOnPlatform = false;
 		break;
 
