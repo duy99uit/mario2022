@@ -16,6 +16,7 @@
 #include "Mushroom.h"
 #include "PiranhaPlant.h"
 #include "Koopas.h"
+#include "PiranhaPlantFire.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -97,6 +98,11 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		DebugOut(L"Mario PiranhaPlant !\n");
 		/*OnCollisionWithPiranhaPlant(e);*/
+	}
+	else if (dynamic_cast<PiranhaPlantFire*>(e->obj))
+	{
+		DebugOut(L"mario collision with piranhaPlantFire \n");
+		OnCollisionWithPiranhaPlantFire();
 	}
 	else if (dynamic_cast<CKoopas*>(e->obj)) {
 		DebugOut(L"mario collision with koopas \n");
@@ -182,6 +188,21 @@ void CMario::OnCollisionWithPiranhaPlant(LPCOLLISIONEVENT e)
 	else
 	{
 		SetState(MARIO_STATE_DIE);
+	}
+}
+void CMario::OnCollisionWithPiranhaPlantFire()
+{
+	DebugOut(L"mario collision with PiranhaPlantFire \n");
+	if (level != MARIO_LEVEL_SMALL)
+	{
+		level -= 1;
+		SetLevel(level);
+		//DebugOut(L">>> Mario tranfer small >>> \n");
+	}
+	else
+	{
+		DebugOut(L">>> Mario die >>> \n");
+		//SetState(MARIO_STATE_DIE);
 	}
 }
 void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
