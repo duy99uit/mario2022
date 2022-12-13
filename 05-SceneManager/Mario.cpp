@@ -865,15 +865,6 @@ void CMario::HandleTurning() {
 
 void CMario::HandleFlying() {
 
-	// handle fly
-	if (GetTickCount64() - fly_start > MARIO_FLYING_TIME && fly_start != 0 && isFlying)
-	{
-		DebugOut(L"Start fly \n");
-		fly_start = 0;
-		isRunning = false;
-		isFlying = false;
-	}
-
 	// mario fly normal, not out logic
 	if (level == MARIO_LEVEL_TAIL) {
 		if (isFlying)
@@ -883,5 +874,17 @@ void CMario::HandleFlying() {
 				DebugOut(L"Start fall down \n");
 			}
 		}
+	}
+	if (normalFallDown && isFlying) {
+		ay = 0.001f;
+	}
+
+	// handle fly
+	if (GetTickCount64() - fly_start > MARIO_FLYING_TIME && fly_start != 0 && isFlying)
+	{
+		DebugOut(L"Start fly \n");
+		fly_start = 0;
+		isRunning = false;
+		isFlying = false;
 	}
 }
