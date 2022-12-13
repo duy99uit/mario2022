@@ -26,6 +26,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (!isFlying)
 		HandleMarioJump();
 	HandleFlying();
+	HandleFlapping();
 	HandleMarioJump();
 	HandleTurning();
 	HandleMarioKick();
