@@ -176,6 +176,7 @@
 // FLY
 #define MARIO_SPEED_STACK			0.05f
 #define MARIO_FLYING_TIME			1750
+#define MARIO_NORMAL_FLY_MAX 0.3f
 
 
 class CMario : public CGameObject
@@ -227,6 +228,7 @@ public:
 	// handle mario fly
 	BOOLEAN isFlying = false;
 	BOOLEAN isFlappingFlying = false;
+	BOOLEAN normalFallDown = false;
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y
 	int turningStack = 0;
