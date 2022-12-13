@@ -700,7 +700,7 @@ void CMario::SetState(int state)
 				DebugOut(L"mario not tail \n");
 			}
 		}
-
+		normalFallDown = false;
 		isOnPlatform = false;
 		break;
 
@@ -886,5 +886,11 @@ void CMario::HandleFlying() {
 		fly_start = 0;
 		isRunning = false;
 		isFlying = false;
+	}
+}
+
+void CMario::HandleFlapping() {
+	if (level == MARIO_LEVEL_TAIL && isFlapping) {
+		vy = MARIO_SLOW_FALLING_SPEED;
 	}
 }

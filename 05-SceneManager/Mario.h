@@ -177,6 +177,7 @@
 #define MARIO_SPEED_STACK			0.05f
 #define MARIO_FLYING_TIME			1750
 #define MARIO_NORMAL_FLY_MAX 0.3f
+#define MARIO_SLOW_FALLING_SPEED	0.05f
 
 
 class CMario : public CGameObject
@@ -287,6 +288,7 @@ public:
 	// turning
 	void HandleTurning();
 	void HandleFlying();
+	void HandleFlapping();
 
 	// Not jumping
 	void pullDown() {
