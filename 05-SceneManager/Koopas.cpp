@@ -1,6 +1,7 @@
 #include "Koopas.h"
 #include "PlayScene.h"
 #include "Block.h"
+#include "QuestionBrick.h"
 
 CKoopas::CKoopas(int tag)
 {
@@ -241,6 +242,12 @@ void CKoopas::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 			koopas->nx = -koopas->nx;
 		}
 	}
+}
+
+void CKoopas::OnCollisionWithQuestionBrick(LPCOLLISIONEVENT e) {
+	QuestionBrick* qBrick = dynamic_cast<QuestionBrick*>(e->obj);
+	if (qBrick->state != QUESTION_BRICK_HIT && state == KOOPAS_STATE_TURNING)
+		qBrick->SetState(QUESTION_BRICK_HIT);
 }
 
 void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& bottom)

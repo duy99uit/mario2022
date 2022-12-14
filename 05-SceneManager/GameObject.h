@@ -17,7 +17,7 @@ class CGameObject
 {
 protected:
 	
-	int state;
+	
 
 	bool isDeleted;
 
@@ -41,6 +41,9 @@ public:
 	int nx;
 	float vx;
 	float vy;
+
+	// for handle QBrick leaf
+	int state;
 
 
 	int tagType = 0;
