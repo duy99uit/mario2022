@@ -18,6 +18,10 @@
 #define MUSHROOM_ITEM_QUESTION_BRICK	1
 #define ITEM_MUSHROOM_ANI_SET_ID 37
 
+//leaf
+#define ITEM_LEAF	2
+#define LEAF_ANI_SET_ID		36
+
 
 class QuestionBrick :public CGameObject
 {

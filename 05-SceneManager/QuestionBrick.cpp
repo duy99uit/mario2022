@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Mario.h"
 #include "Mushroom.h"
+#include "Leaf.h"
 
 QuestionBrick::QuestionBrick(int tagType) : CGameObject() {
 	state = QUESTION_BRICK_NORMAL;
@@ -67,6 +68,12 @@ CGameObject* QuestionBrick::HandleQRItem(int itemType) {
 		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 		obj->SetAnimationSet(ani_set);
 	}
+	if (itemType == ITEM_LEAF) {
+		obj = new CLeaf();
+		ani_set_id = LEAF_ANI_SET_ID;
+		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
+		obj->SetAnimationSet(ani_set);
+	}
 	return obj;
 }
 
@@ -91,6 +98,13 @@ void QuestionBrick::HandleShowItem(int itemType) {
 		obj->SetState(MUSHROOM_STATE_UP);
 		currentScene->AddObjectToScene(obj);
 		DebugOut(L"QuestionBrick Mushroom create \n");
+	}
+	if (dynamic_cast<CLeaf*>(this->obj)) {
+		CLeaf* obj = dynamic_cast<CLeaf*>(this->obj);
+		obj->SetPosition(x, y);
+		obj->SetZIndex(-1);
+		currentScene->AddObjectToScene(obj);
+		DebugOut(L"Leaf create \n");
 	}
 }
 
