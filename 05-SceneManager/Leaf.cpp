@@ -51,6 +51,7 @@ void CLeaf::SetState(int state) {
 	case LEAF_STATE_UP:
 		vy = -0.05f;
 		vx = 0;
+		start_y = y;
 		break;
 	case LEAF_STATE_FALLING:
 		vy = 0.025f;
