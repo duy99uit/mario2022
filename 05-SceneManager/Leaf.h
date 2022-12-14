@@ -4,9 +4,24 @@
 #define LEAF_BBOX_WIDTH  16
 #define LEAF_BBOX_HEIGHT 16
 
+#define LEAF_STATE_IDLE		0
+#define LEAF_STATE_UP		100
+#define LEAF_STATE_FALLING	111
+
+#define LEAF_UP_HEIGHT	 48
+
+#define LEAF_ANI_RIGHT		0
+#define LEAF_ANI_LEFT		1
+
 class CLeaf : public CGameObject
 {
 public:
+
+	bool isAppear = false;
+	void SetAppear(bool isAppear)
+	{
+		this->isAppear = isAppear;
+	}
 
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();

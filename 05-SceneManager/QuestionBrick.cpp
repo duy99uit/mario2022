@@ -101,8 +101,10 @@ void QuestionBrick::HandleShowItem(int itemType) {
 	}
 	if (dynamic_cast<CLeaf*>(this->obj)) {
 		CLeaf* obj = dynamic_cast<CLeaf*>(this->obj);
+		obj->SetAppear(true);
 		obj->SetPosition(x, y);
 		obj->SetZIndex(-1);
+		obj->SetState(LEAF_STATE_UP);
 		currentScene->AddObjectToScene(obj);
 		DebugOut(L"Leaf create \n");
 	}
