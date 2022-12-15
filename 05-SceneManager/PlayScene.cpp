@@ -370,12 +370,33 @@ void CPlayScene::SetCam(float cx, float cy, DWORD dt) {
 	if (cx >= mw - sw)//Right Edge
 		cx = mw - sw;
 
+
+	// handle CamY when fly
+	if (mario->isFlying && mario->GetY() < 300) {
+		isTurnOnCamY = true;
+		DebugOut(L"GetY: %d", mario->GetY());
+	}
+	else if (mario->isOnPlatform && mario->GetY() < 300) {
+		isTurnOnCamY = true;
+		DebugOut(L"GetY: %d", mario->GetY());
+	}
+	else if (mario->isOnPlatform) {
+		isTurnOnCamY = false;
+	}
+
 	//CamY
 	if (isTurnOnCamY)
+	{
+		DebugOut(L"cyyyyyyy: %d \n", cy);
 		cy -= sh / 2;
+	}
 	else
+	{
+		DebugOut(L"cyyyyyyy: %d \n", cy);
 		//cy -= sh / 2;
 		cy = mh - sh;
+	}
+
 
 	if (cy <= 0)//Top Edge
 		cy = 0;

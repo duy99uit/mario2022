@@ -277,6 +277,11 @@ public:
 
 	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable == 0); }
 
+	// handle camera update when fly
+	int GetY() {
+		return this->y;
+	}
+
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 
