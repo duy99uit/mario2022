@@ -152,6 +152,10 @@ void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e) {
 		DebugOut(L"koopas on collision with koopas \n");
 		OnCollisionWithKoopas(e);
 	}
+	if (dynamic_cast<QuestionBrick*>(e->obj)) {
+		DebugOut(L"koopas on collision with qBrick \n");
+		OnCollisionWithQuestionBrick(e);
+	}
 
 }
 
