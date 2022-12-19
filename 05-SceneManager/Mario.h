@@ -262,7 +262,7 @@ public:
 		level = MARIO_LEVEL_SMALL;
 		untouchable = 0;
 		untouchable_start = -1;
-		isOnPlatform = false;
+		/*isOnPlatform = false;*/
 		coin = 0;
 		tail = new CTail(180, y);
 	}
