@@ -25,10 +25,9 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vx += ax * dt;
 
 	if (!isFlying)
-		HandleMarioJump();
+	HandleMarioJump();
 	HandleFlying();
 	HandleFlapping();
-	HandleMarioJump();
 	HandleTurning();
 	HandleMarioKick();
 
@@ -743,6 +742,7 @@ void CMario::SetState(int state)
 		isRunning = false;
 		break;
 	case MARIO_STATE_JUMP:
+		isJumping = true;
 		if (isSitting) break;
 		if (isOnPlatform)
 		{
