@@ -378,7 +378,7 @@ void CPlayScene::SetCam(float cx, float cy, DWORD dt) {
 		isTurnOnCamY = true;
 		DebugOut(L"GetY: %d", mario->GetY());
 	}
-	else if (mario->isOnPlatform && mario->GetY() < 300) {
+	else if (mario->GetLevel() == MARIO_LEVEL_TAIL && mario->isOnPlatform && mario->GetY() < 300) {
 		isTurnOnCamY = true;
 		DebugOut(L"GetY: %d", mario->GetY());
 	}
