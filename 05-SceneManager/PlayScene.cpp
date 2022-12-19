@@ -17,6 +17,7 @@
 #include "PiranhaPlant.h"
 #include "PiranhaPlantFire.h"
 #include "Koopas.h"
+#include "Card.h"
 
 using namespace std;
 
@@ -237,7 +238,8 @@ void CPlayScene::LoadObjects(LPCWSTR assetFile)
 			obj = new CCoin(tag);
 			break;
 		case OBJECT_TYPE_CARD:
-			obj = new CBrick();
+			obj = new CardItem();
+			DebugOut(L"[INFO] Card was create \n");
 			break;
 		case OBJECT_TYPE_PORTAL:
 			obj = new CBrick();

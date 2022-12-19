@@ -1,17 +1,26 @@
-#pragma once
-#include "GameObject.h"
+#include "Card.h"
 
-#define CARD_BBOX_WIDTH		16
+CardItem::CardItem() {
+	vx = 0;
+	vy = 0;
+}
 
-class CardItem : public CGameObject
+void CardItem::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-public:
-	CardItem();
-	virtual void Render();
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	l = x;
+	t = y;
+	r = l + CARD_BBOX_WIDTH;
+	b = t + CARD_BBOX_WIDTH;
+}
 
-	virtual int IsCollidable() { return 1; };
-	virtual int IsBlocking() { return 0; }
+void CardItem::Render() {
 
-};
+	int ani = 1;
+
+	animation_set->at(ani)->Render(x, y);
+}
+
+void CardItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
+
+	CGameObject::Update(dt);
+}

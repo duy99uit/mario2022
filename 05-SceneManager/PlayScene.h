@@ -9,7 +9,6 @@
 #include "Map.h"
 //#include "Koopas.h"
 
-
 class CPlayScene : public CScene
 {
 protected:
