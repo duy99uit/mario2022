@@ -316,4 +316,7 @@ public:
 	}
 	void HandleMarioDie();
 
+	// change position
+	void EndMap() { x = 2680; y = 0; };
+
 };
