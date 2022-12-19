@@ -26,6 +26,8 @@ protected:
 	float start_x;
 	float start_y;
 
+	int ny;
+
 
 	LPANIMATION_SET animation_set;
 
