@@ -705,7 +705,7 @@ void CMario::SetState(int state)
 		nx = 1;
 		// handle fly here
 		isReadyToRun = true;
-		if (vx > MARIO_SPEED_STACK && isReadyToRun) {
+		if (vx >= MARIO_SPEED_STACK && isReadyToRun) {
 			isRunning = true;
 		}
 		else {
@@ -943,7 +943,7 @@ void CMario::HandleFlying() {
 		}
 	}
 	if (normalFallDown && isFlying) {
-		ay = 0.001f;
+		ay = 0.0005f;
 	}
 
 	// handle fly
