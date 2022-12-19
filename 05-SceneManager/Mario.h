@@ -194,6 +194,8 @@
 #define MARIO_ANI_TAIL_HOLD_RUNNING_LEFT		84
 #define MARIO_ANI_TAIL_KICKING_LEFT				86
 
+#define MARIO_JUMP_DEFLECT_SPEED_GB	0.1f
+
 class CMario : public CGameObject
 {
 	BOOLEAN isSitting;
