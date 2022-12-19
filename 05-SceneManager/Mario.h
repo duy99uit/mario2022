@@ -318,5 +318,7 @@ public:
 
 	// change position
 	void EndMap() { x = 2680; y = 0; };
+	void ExtraMap() { x = 2270; y = 0; };
+	void StartMap() { x = 80; y = 0; };
 
 };

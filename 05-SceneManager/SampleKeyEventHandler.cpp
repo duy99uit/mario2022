@@ -47,8 +47,14 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_A:
 		//mario->isHolding = true;
 		mario->SetState(MARIO_STATE_TAIL_ATTACK);
+	case DIK_Z:
+		mario->ExtraMap();
+		break;
 	case DIK_X:
 		mario->EndMap();
+		break;
+	case DIK_C:
+		mario->StartMap();
 		break;
 	}
 
