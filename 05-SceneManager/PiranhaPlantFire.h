@@ -1,5 +1,6 @@
 #pragma once
 #include "PiranhaPlant.h"
+#include "FireBullet.h"
 
 #define PIRANHAPLANT_BBOX_WIDTH					20
 #define PIRANHAPLANT_BOX_HEIGHT					24
@@ -19,7 +20,12 @@
 
 #define PIRANHAPLANT_STATE_DEATH			1
 #define PIRANHAPLANT_DIE_TIME			300
-#define PIRANHAPLANT_DELAY_TIME			2000
+#define PIRANHAPLANT_DELAY_TIME			1500
+
+#define PIRANHAPLANT_AIM_TIME			1000
+
+#define PIRANHAPLANT_STATE_SHOOTING		100
+#define BULLET_ANI_SET_ID				9
 
 class PiranhaPlantFire :
 	public PiranhaPlant
@@ -29,6 +35,11 @@ class PiranhaPlantFire :
 
 	ULONGLONG die_start = 0;
 	ULONGLONG delay_start = 0;
+
+	ULONGLONG shooting_start = 0;
+	ULONGLONG aim_start = 0;
+
+	FireBullet* bullet = NULL;
 
 	bool Up = false;
 	bool Right = false;
@@ -57,5 +68,9 @@ public:
 		else { BBHeight = PIRANHAPLANT_RED_BBOX_HEIGHT; }
 		limitY = ly - BBHeight;
 	}
+
+	void Shoot();
+	void StartAim() { aim_start = GetTickCount64(); }
+	void StartShooting() { shooting_start = GetTickCount64(); }
 
 };
