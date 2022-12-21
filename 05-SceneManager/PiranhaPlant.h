@@ -30,7 +30,7 @@ public:
 	virtual void SetState(int state);
 
 	void StartBitting() { biting_start = GetTickCount64(); }
-	void SetLimitY(float ly) { limitY = ly - PIRANHAPLANT_BBOX_HEIGHT_ANI; DebugOut(L"LimitY::%f\n", limitY); }
+	void SetLimitY(float ly) { limitY = ly - PIRANHAPLANT_BBOX_HEIGHT_ANI; }
 
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }

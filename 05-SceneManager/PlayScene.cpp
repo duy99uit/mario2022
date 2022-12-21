@@ -223,6 +223,7 @@ void CPlayScene::LoadObjects(LPCWSTR assetFile)
 			break;
 		case OBJECT_TYPE_FIREPIRANHAPLANT:
 			obj = new PiranhaPlantFire(tag);
+			((PiranhaPlantFire*)obj)->SetLimitY(y);
 			DebugOut(L"Running here\n");
 			obj->SetZIndex(-1);
 			break;
@@ -350,6 +351,7 @@ void CPlayScene::Render()
 	current_map->DrawMap();
 
 	// zIndex Render Front - Behind
+
 	sort(this->objects.begin(), this->objects.end(), [](const CGameObject* lObj, const CGameObject* rObj) {
 		return lObj->zIndex < rObj->zIndex;
 	});
