@@ -18,6 +18,7 @@
 #include "Koopas.h"
 #include "PiranhaPlantFire.h"
 #include "Leaf.h"
+#include "Card.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -30,6 +31,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	HandleFlapping();
 	HandleTurning();
 	HandleMarioKick();
+	HandleFinishMap();
 
 	for (int i = 0; i < coObjects->size(); i++)
 	{
@@ -264,6 +266,15 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 		e->obj->Delete();
 	}
 }
+void CMario::OnCollisionWithCardItem(LPCOLLISIONEVENT e) {
+	CardItem* card = dynamic_cast<CardItem*>(e->obj);
+	if (e->ny != 0 || e->nx != 0) {
+		card->SetAppear(false);
+		card->isCardDeleted = true;
+		isFinish = true;
+	}
+}
+
 
 //
 // Get animation ID for small Mario
@@ -959,5 +970,16 @@ void CMario::HandleFlying() {
 void CMario::HandleFlapping() {
 	if (level == MARIO_LEVEL_TAIL && isFlapping) {
 		vy = MARIO_SLOW_FALLING_SPEED;
+	}
+}
+
+void CMario::HandleFinishMap() {
+	if (isFinish) {
+		ax = MARIO_ACCELERATION;
+		ay = MARIO_GRAVITY;
+		nx = 1;
+		vx = MARIO_WALKING_SPEED;
+		DebugOut(L"HandleFinishMap Mario collision with Card and go to right - end 1 -1 \n");
+		SetState(MARIO_STATE_WALKING_RIGHT);
 	}
 }

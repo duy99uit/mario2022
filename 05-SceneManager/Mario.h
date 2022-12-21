@@ -17,7 +17,7 @@
 #define MARIO_JUMP_SPEED_Y		0.35f
 #define MARIO_JUMP_RUN_SPEED_Y	0.4f
 
-#define MARIO_GRAVITY			0.0005f
+#define MARIO_GRAVITY			0.0002f
 
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
 #define MARIO_KICKING_TIME			200
@@ -196,6 +196,9 @@
 
 #define MARIO_JUMP_DEFLECT_SPEED_GB	0.1f
 
+//end map
+#define MARIO_ACCELERATION			0.07f
+
 class CMario : public CGameObject
 {
 	BOOLEAN isSitting;
@@ -227,6 +230,7 @@ class CMario : public CGameObject
 	void OnCollisionWithPiranhaPlantFire();
 	void OnCollisionWithKoopas(LPCOLLISIONEVENT e);
 	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
+	void OnCollisionWithCardItem(LPCOLLISIONEVENT e);
 
 	int GetAniIdBig();
 	int GetAniIdSmall();
@@ -252,6 +256,9 @@ public:
 	int turningStack = 0;
 
 	CTail* tail = NULL;
+
+	// end game
+	bool isFinish = false;
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{
@@ -285,6 +292,8 @@ public:
 	}
 
 	void OnNoCollision(DWORD dt);
+
+	// colission
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 
 	void SetLevel(int l);
@@ -311,6 +320,9 @@ public:
 	void HandleTurning();
 	void HandleFlying();
 	void HandleFlapping();
+
+	//end map 1-1
+	void HandleFinishMap();
 
 	// Not jumping
 	void pullDown() {

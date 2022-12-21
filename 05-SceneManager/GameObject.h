@@ -38,6 +38,9 @@ public:
 	void GetSpeed(float& vx, float& vy) { vx = this->vx; vy = this->vy; }
 
 	int GetState() { return this->state; }
+
+	bool isCardDeleted; // delete card
+
 	float x;
 	float y;
 	int nx;
