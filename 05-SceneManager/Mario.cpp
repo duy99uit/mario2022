@@ -19,6 +19,7 @@
 #include "PiranhaPlantFire.h"
 #include "Leaf.h"
 #include "Card.h"
+#include "FireBullet.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -118,6 +119,9 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	else if (dynamic_cast<CLeaf*>(e->obj)) {
 		DebugOut(L"mario collision with leaf \n");
 		OnCollisionWithLeaf(e);
+	}
+	else if (dynamic_cast<FireBullet*>(e->obj)) {
+		
 	}
 
 		
@@ -274,6 +278,32 @@ void CMario::OnCollisionWithCardItem(LPCOLLISIONEVENT e) {
 		isFinish = true;
 	}
 }
+void CMario::OnCollisionWithFireBullet(LPCOLLISIONEVENT e) {
+	FireBullet* firebullet = dynamic_cast<FireBullet*>(e->obj);
+
+	if (e->ny != 0 || e->nx != 0) {
+		DebugOut(L"Mario collision with fire bullet \n");
+		if (level == MARIO_LEVEL_TAIL)
+		{
+			SetLevel(MARIO_LEVEL_BIG);
+			StartUntouchable();
+			DebugOut(L">>> tail to big >>>%d \n", level);
+		}
+		else if (level == MARIO_LEVEL_BIG) {
+			SetLevel(MARIO_LEVEL_SMALL);
+			StartUntouchable();
+			DebugOut(L">>> big to small >>>%d \n", level);
+		}
+		else
+		{
+			DebugOut(L">>> Mario basic die >>> \n");
+			//SetState(MARIO_STATE_DIE);
+		}
+		e->obj->Delete();
+	}
+}
+
+
 
 
 //

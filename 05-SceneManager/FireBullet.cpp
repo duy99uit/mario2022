@@ -1,5 +1,7 @@
 #include "FireBullet.h"
 #include "PiranhaPlantFire.h"
+#include "Mario.h"
+#include "PlayScene.h"
 
 FireBullet::FireBullet(float bx, float by, bool up, bool right) {
 	if (up) {
@@ -29,6 +31,25 @@ void FireBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	x += vx * dt;
 	y += vy * dt;
+
+	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	if (mario != NULL) {
+		float mLeft, mTop, mRight, mBottom;
+		float mWidth = mario->GetWidth();
+		mario->GetBoundingBox(mLeft, mTop, mRight, mBottom);
+		if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom)) {
+			Delete();
+			if (mario->GetLevel() != MARIO_LEVEL_SMALL)
+			{
+				mario->SetLevel(mario->GetLevel() - 1);
+			}
+			else
+			{
+				DebugOut(L">>> Mario DIE >>> \n");
+				mario->SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
 }
 
 void FireBullet::Render()

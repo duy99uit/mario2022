@@ -28,6 +28,7 @@ void PiranhaPlantFire::Render()
 void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt);
+	GetDirect();
 
 	if (y <= limitY && vy < 0)
 	{
@@ -126,3 +127,20 @@ void PiranhaPlantFire::Shoot() {
 	bullet->SetAnimationSet(ani_set);
 	currentScene->AddObjectToScene(bullet);
 }
+void PiranhaPlantFire::GetDirect() {
+	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	int mH;
+	if (mario->GetLevel() == MARIO_LEVEL_SMALL)
+		mH = MARIO_SMALL_BBOX_HEIGHT;
+	else
+		mH = MARIO_BIG_BBOX_HEIGHT;
+
+	if (mario->y + mH < limitY + BBHeight)
+		Up = true;
+	else
+		Up = false;
+	if (mario->x <= x)
+		Right = false;
+	else
+		Right = true;
+};
