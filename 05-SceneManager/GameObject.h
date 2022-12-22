@@ -16,10 +16,6 @@ using namespace std;
 class CGameObject
 {
 protected:
-	
-	
-
-	bool isDeleted;
 
 	int isBlocking = 1;
 
@@ -39,7 +35,7 @@ public:
 
 	int GetState() { return this->state; }
 
-	bool isCardDeleted; // delete card
+	bool isDeleted; // delete card
 
 	float x;
 	float y;
@@ -48,11 +44,13 @@ public:
 	float vy;
 
 	// for handle QBrick leaf
-	int state;
+	int state; // for qBrick state
 
 
-	int tagType = 0;
-	int zIndex = 0;
+	int tagType = 0; // define for goomba tag
+	int z = 0;
+
+	// question brick animation - push and fall
 	bool isPushingUp = false;
 	bool isFallingDown = false;
 
@@ -103,7 +101,7 @@ public:
 		bool down2 = friend_bottom >= this_top;
 
 		return on1 && on2 && down1 && down2;
-	}
+	};
 
 	float getX() { return x; }
 	float getY() { return y; }
@@ -113,11 +111,11 @@ public:
 	static bool IsDeleted(const LPGAMEOBJECT& o) { return o->isDeleted; }
 
 	void SetZIndex(int z) {
-		this->zIndex = z;
+		this->z = z;
 	}
 
 	int GetZIndex() {
-		return this->zIndex;
+		return this->z;
 	}
 	float GetWidth()
 	{

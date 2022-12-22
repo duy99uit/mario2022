@@ -269,7 +269,7 @@ void CMario::OnCollisionWithCardItem(LPCOLLISIONEVENT e) {
 	CardItem* card = dynamic_cast<CardItem*>(e->obj);
 	if (e->ny != 0 || e->nx != 0) {
 		card->SetAppear(false);
-		card->isCardDeleted = true;
+		card->isDeleted = true;
 		isFinish = true;
 	}
 }

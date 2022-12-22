@@ -353,8 +353,8 @@ void CPlayScene::Render()
 	// zIndex Render Front - Behind
 
 	sort(this->objects.begin(), this->objects.end(), [](const CGameObject* lObj, const CGameObject* rObj) {
-		return lObj->zIndex < rObj->zIndex;
-	});
+		return lObj->z < rObj->z;
+		});
 
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
