@@ -219,7 +219,7 @@ void CPlayScene::LoadObjects(LPCWSTR assetFile)
 		case OBJECT_TYPE_PIRANHAPLANT:
 			obj = new PiranhaPlant();
 			((PiranhaPlant*)obj)->SetLimitY(y);
-			/*obj->SetZIndex(-1);*/
+			obj->SetZIndex(-1);
 			break;
 		case OBJECT_TYPE_FIREPIRANHAPLANT:
 			obj = new PiranhaPlantFire(tag);
