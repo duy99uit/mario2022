@@ -37,7 +37,6 @@ void PiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		biting_start = 0;
 	}
 
-	//x += vx * dt;
 	y += vy * dt;
 
 	// die by mario tail

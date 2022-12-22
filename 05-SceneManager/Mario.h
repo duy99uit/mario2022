@@ -2,9 +2,7 @@
 #include "GameObject.h"
 
 #include "Animations.h"
-
 #include "debug.h"
-
 #include "Tail.h"
 
 #define MARIO_WALKING_SPEED		0.05f
@@ -213,11 +211,9 @@ class CMario : public CGameObject
 	int untouchable;
 	ULONGLONG untouchable_start;
 	ULONGLONG start_kicking = 0;
-	BOOLEAN isJumping = false;
-
 	ULONGLONG start_turning_state = 0;
 	ULONGLONG start_turning = 0;
-
+	BOOLEAN isJumping = false;
 
 	int coin;
 
@@ -272,7 +268,7 @@ public:
 		level = MARIO_LEVEL_SMALL;
 		untouchable = 0;
 		untouchable_start = -1;
-		/*isOnPlatform = false;*/
+		isOnPlatform = false;
 		coin = 0;
 		tail = new CTail(180, y);
 	}

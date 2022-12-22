@@ -109,6 +109,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		vy = -GOOMBA_JUMP_SPEED;
 		ay = GOOMBA_GRAVITY;
 	}
+
 	if (vy < -GOOMBA_HIGHJUMP_SPEED && state == GOOMBA_STATE_RED_HIGHJUMPING)
 	{
 		vy = -GOOMBA_HIGHJUMP_SPEED;
@@ -120,6 +121,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CMario* mario = currentScene->GetPlayer();
 	float mLeft, mTop, mRight, mBottom;
 	float oLeft, oTop, oRight, oBottom;
+
 	if (mario != NULL && state != GOOMBA_STATE_DIE) {
 		if (tagType == GOOMBA_RED && mario->isTuring && mario->GetLevel() == MARIO_LEVEL_TAIL) {
 			mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
@@ -128,8 +130,8 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				nx = mario->nx;
 				DebugOut(L"goomba red turn level by mario tail \n");
-				SetTagType(GOOMBA_RED_NORMAL);
 				SetState(GOOMBA_STATE_DIE_BY_MARIO);
+				SetTagType(GOOMBA_RED_NORMAL);
 				return;
 			}
 		}

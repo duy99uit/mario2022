@@ -50,8 +50,11 @@ CGameObject* QuestionBrick::HandleQRItem(int itemType) {
 	CMario* mario = currentScene->GetPlayer();
 	int ani_set_id = -1;
 	CAnimationSets* animation_sets = CAnimationSets::GetInstance();
+
 	if (totalItems >= 1) {
+		// limit item = 1 when hit 1 qBrick
 		totalItems--;
+		
 	}
 	else {
 		return NULL;
@@ -115,8 +118,8 @@ void QuestionBrick::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	x += vx * dt;
 	y += vy * dt;
 
-
 	float mLeft, mTop, mRight, mBottom;
+
 	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	if (mario != NULL && totalItems > 0 && state != QUESTION_BRICK_HIT && mario->isTuring) {
 		mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
@@ -137,7 +140,7 @@ void QuestionBrick::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			vy = 0;
 
 			// case update QR - Mushroom
-			if (tagType == MUSHROOM_ITEM_QUESTION_BRICK) {
+			if (tagType != COIN_ITEM_QUESTION_BRICK_COIN) {
 				HandleShowItem(tagType);
 			}
 		}
