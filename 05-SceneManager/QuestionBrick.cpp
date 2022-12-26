@@ -65,17 +65,19 @@ CGameObject* QuestionBrick::HandleQRItem(int itemType) {
 		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 		obj->SetAnimationSet(ani_set);
 	}
-	if (itemType == MUSHROOM_ITEM_QUESTION_BRICK) {
-		obj = new CMushroom();
-		ani_set_id = ITEM_MUSHROOM_ANI_SET_ID;
-		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
-		obj->SetAnimationSet(ani_set);
-	}
-	if (itemType == ITEM_LEAF) {
-		obj = new CLeaf();
-		ani_set_id = LEAF_ANI_SET_ID;
-		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
-		obj->SetAnimationSet(ani_set);
+	if (itemType == ITEM_CUSTOM || itemType == ITEM_LEAF) {
+		if (mario->GetLevel() == MARIO_LEVEL_SMALL) {
+			obj = new CMushroom();
+			ani_set_id = ITEM_MUSHROOM_ANI_SET_ID;
+			LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
+			obj->SetAnimationSet(ani_set);
+		}
+		if (mario->GetLevel() == MARIO_LEVEL_BIG) {
+			obj = new CLeaf();
+			ani_set_id = LEAF_ANI_SET_ID;
+			LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
+			obj->SetAnimationSet(ani_set);
+		}
 	}
 	return obj;
 }

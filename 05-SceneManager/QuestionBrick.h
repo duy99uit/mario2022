@@ -22,6 +22,8 @@
 #define ITEM_LEAF	2
 #define LEAF_ANI_SET_ID		36
 
+#define ITEM_CUSTOM		1
+
 
 class QuestionBrick :public CGameObject
 {

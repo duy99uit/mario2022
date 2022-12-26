@@ -348,7 +348,9 @@ void CKoopas::SetState(int state)
 		break;
 	case KOOPAS_STATE_TURNING:
 		// turn
-		vx = KOOPAS_WALKING_SPEED * 4;
+		CMario* mario;
+		mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+		vx = mario->nx * KOOPAS_WALKING_SPEED * 4;
 		vy = KOOPAS_FALL_SPEED;
 		ay = vy;
 		break;
