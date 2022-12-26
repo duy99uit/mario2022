@@ -26,6 +26,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
+	if (vy < -0.26f && level != MARIO_LEVEL_TAIL) {
+		DebugOut(L"update vy");
+		vy = -0.26f;
+		pullDown();
+	}
+
 	if (!isFlying)
 	HandleMarioJump();
 	HandleFlying();
@@ -804,7 +810,9 @@ void CMario::SetState(int state)
 		break;
 
 	case MARIO_STATE_RELEASE_JUMP:
+		isJumping = false;
 		pullDown();
+		
 		break;
 
 	case MARIO_STATE_SIT:
@@ -831,6 +839,8 @@ void CMario::SetState(int state)
 	case MARIO_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
+		ay = MARIO_GRAVITY;
+		isJumping = false;
 		break;
 
 	case MARIO_STATE_DIE:

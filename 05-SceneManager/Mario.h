@@ -260,6 +260,9 @@ public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
+		isJumping = false;
+		isRunning = false;
+		isKick = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY;
@@ -323,7 +326,11 @@ public:
 
 	// Not jumping
 	void pullDown() {
-		if (!isFlapping) ay = MARIO_GRAVITY; isJumping = false;
+		if (!isFlapping) {
+			ay = MARIO_GRAVITY;
+			//DebugOut(L"ay true \n");
+		}
+		isJumping = false;
 	}
 	void HandleMarioDie();
 
