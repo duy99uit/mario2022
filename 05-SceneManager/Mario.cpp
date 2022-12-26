@@ -237,8 +237,14 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 			HandleMarioDie();
 		}
 	}
-	else if (e->ny != 0) {
+	if (e->ny > 0) {
+		if (koopas->GetState() == KOOPAS_STATE_IN_SHELL || koopas->GetState() == KOOPAS_STATE_SHELL_UP) {
+			koopas->SetState(KOOPAS_STATE_TURNING);
+		}
+	}
+	else {
 		DebugOut(L"mario collision with koopas if 2");
+		vy = -MARIO_JUMP_DEFLECT_SPEED_GB;
 		if (koopas->GetState() == KOOPAS_STATE_WALKING) {
 			if (koopas->tagType == KOOPAS_GREEN_PARA) {
 				koopas->SetTagType(KOOPAS_GREEN);
@@ -836,10 +842,12 @@ void CMario::SetState(int state)
 		StartKicking();
 		break;
 	case MARIO_STATE_TAIL_ATTACK:
-		if (!isTuring) {
-			turningStack = 0;
-			StartTurning();
-			DebugOut(L"Start Attack by Tail \n");
+		if (level == MARIO_LEVEL_TAIL) {
+			if (!isTuring) {
+				turningStack = 0;
+				StartTurning();
+				//DebugOut(L"Start Attack by Tail \n");
+			}
 		}
 		break;
 	}
