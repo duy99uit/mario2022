@@ -1,5 +1,6 @@
 #include "MushRoom.h"
 #include "debug.h"
+#include "Block.h"
 
 
 CMushroom::CMushroom(int type) {
@@ -16,6 +17,7 @@ void CMushroom::Render() {
 
 void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	if (isDeleted) return;
+
 
 	if (state == MUSHROOM_STATE_UP)
 	{
@@ -35,6 +37,21 @@ void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			//DebugOut(L"Mushroom state right running!\n");
 		}
 	}
+
+	// for handle mushroom with block
+	for (int i = 0; i < coObjects->size(); i++) {
+		LPGAMEOBJECT obj = coObjects->at(i);
+		if (dynamic_cast<CBlock*>(obj))
+		{
+			if (obj->getY() > this->y) {
+				obj->SetIsBlocking(1);
+			}
+			else {
+				obj->SetIsBlocking(0);
+			}
+		}
+	}
+
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);

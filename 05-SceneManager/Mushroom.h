@@ -13,6 +13,8 @@
 #define MUSHROOM_STATE_RIGHT 1
 #define MUSHROOM_STATE_LEFT	-1
 
+
+
 class CMushroom :public CGameObject
 {
 	bool isAppear;
