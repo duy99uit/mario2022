@@ -20,6 +20,7 @@
 #include "Leaf.h"
 #include "Card.h"
 #include "FireBullet.h"
+#include "Switch.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -125,6 +126,9 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	}
 	else if (dynamic_cast<FireBullet*>(e->obj)) {
 		
+	}
+	else if (dynamic_cast<Switch*>(e->obj)) {
+		OnCollisionWithSwitch(e);
 	}
 
 		
@@ -311,6 +315,16 @@ void CMario::OnCollisionWithFireBullet(LPCOLLISIONEVENT e) {
 }
 
 
+void CMario::OnCollisionWithSwitch(LPCOLLISIONEVENT e) {
+	Switch* sw = dynamic_cast<Switch*>(e->obj);
+	if (e->ny < 0) {
+		if (sw->GetState() != SWITCH_STATE_PRESSED) {
+			sw->SetState(SWITCH_STATE_PRESSED);
+			sw->isDeleted = true;
+			vy = -MARIO_JUMP_DEFLECT_SPEED_GB;
+		}
+	}
+}
 
 
 //
