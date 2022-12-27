@@ -18,6 +18,7 @@
 #include "PiranhaPlantFire.h"
 #include "Koopas.h"
 #include "Card.h"
+#include "BreakableBrick.h"
 
 using namespace std;
 
@@ -232,6 +233,10 @@ void CPlayScene::LoadObjects(LPCWSTR assetFile)
 			break;
 		case OBJECT_TYPE_QUESTIONBRICK:
 			obj = new QuestionBrick(option_tag_1);
+			break;
+		case OBJECT_TYPE_BREAKABLEBRICK:
+			obj = new BreakableBrick(x, y, option_tag_1, option_tag_2, option_tag_3);
+			DebugOut(L"[INFO] Break brick is not null!\n");
 			break;
 		case OBJECT_TYPE_BLOCK:
 			obj = new CBlock(x, y);

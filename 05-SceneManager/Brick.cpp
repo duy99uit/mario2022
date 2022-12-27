@@ -14,3 +14,13 @@ void CBrick::Render()
 	animation_set->at(BRICK_ANI_IDLE)->Render(x, y);
 	//RenderBoundingBox();
 }
+CBrick::CBrick(float x, float y, int type, int item, int totalItems) :CGameObject() {
+	this->start_x = x;
+	this->start_y = y;
+	this->type = type;
+	this->item = item;
+	if (totalItems == 0 && item != 0) {
+		this->totalItems = 1;
+	}
+	this->totalItems = totalItems;
+}

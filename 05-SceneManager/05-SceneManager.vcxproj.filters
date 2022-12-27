@@ -145,6 +145,9 @@
     <ClCompile Include="FireBullet.cpp">
       <Filter>Map Objects\Others\FireBullet</Filter>
     </ClCompile>
+    <ClCompile Include="BreakableBrick.cpp">
+      <Filter>Map Objects\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="FireBullet.h">
       <Filter>Map Objects\Others\FireBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakableBrick.h">
+      <Filter>Map Objects\Bricks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
