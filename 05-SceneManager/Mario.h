@@ -199,7 +199,7 @@
 
 class CMario : public CGameObject
 {
-	BOOLEAN isSitting;
+	
 	float maxVx;
 
 	// handle mario fly
@@ -244,6 +244,7 @@ public:
 	BOOLEAN isKick = false;
 	// tail attack
 	BOOLEAN isTuring = false;
+	BOOLEAN isSitting;
 
 	// handle mario fly
 	BOOLEAN isFlying = false;

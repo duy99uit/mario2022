@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+
 #define MUSHROOM_GRAVITY	0.2f
 #define MUSHROOM_SPEED	0.07f
 
@@ -12,6 +13,8 @@
 #define MUSHROOM_STATE_UP 6
 #define MUSHROOM_STATE_RIGHT 1
 #define MUSHROOM_STATE_LEFT	-1
+
+#define MUSHROOM_GREEN	4
 
 
 
@@ -44,6 +47,9 @@ public:
 	virtual void OnNoCollision(DWORD dt);
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
+	int GetTypeMushRoom() { return typeMushroom; }
+
 	CMushroom(int type = 0);
+
 	~CMushroom();
 };

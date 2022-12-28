@@ -1,6 +1,7 @@
 #include "MushRoom.h"
 #include "debug.h"
 #include "Block.h"
+#include "PlayScene.h"
 
 
 CMushroom::CMushroom(int type) {
@@ -10,7 +11,11 @@ CMushroom::CMushroom(int type) {
 
 void CMushroom::Render() {
 	if (isAppear && !isDeleted) {
-		animation_set->at(0)->Render(x, y);
+		if (typeMushroom == MUSHROOM_GREEN) {
+			animation_set->at(1)->Render(x, y);
+		}
+		else
+			animation_set->at(0)->Render(x, y);
 	}
 	RenderBoundingBox();
 }
@@ -59,6 +64,7 @@ void CMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void CMushroom::SetState(int state) {
 	CGameObject::SetState(state);
+	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	switch (state)
 	{
 	case MUSHROOM_STATE_IDLE:
@@ -70,7 +76,7 @@ void CMushroom::SetState(int state) {
 		break;
 	case MUSHROOM_STATE_RIGHT:
 		vy = MUSHROOM_GRAVITY;
-		vx = MUSHROOM_SPEED;
+		vx = mario->nx * MUSHROOM_SPEED;
 		DebugOut(L"Vao day %d\n", vx);
 		break;
 	case MUSHROOM_STATE_LEFT:

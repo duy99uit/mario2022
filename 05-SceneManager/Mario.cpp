@@ -87,11 +87,12 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		vy = 0;
 		if (e->ny < 0) isOnPlatform = true;
 	}
-	else
+	else {
 		if (e->nx != 0 && e->obj->IsBlocking())
 		{
 			vx = 0;
 		}
+	}
 
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);		
@@ -192,9 +193,13 @@ void CMario::OnCollisionWithQuestionBrick(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
 {
+	CMushroom* mushRoom = dynamic_cast<CMushroom*>(e->obj);
 	DebugOut(L"Mario OnCollisionWithMushRoom - change state - big!\n");
 	e->obj->Delete();
-	SetLevel(MARIO_LEVEL_BIG);
+	
+	if (mushRoom->GetTypeMushRoom() != MUSHROOM_GREEN) {
+		SetLevel(MARIO_LEVEL_BIG);
+	}
 }
 
 void CMario::OnCollisionWithPiranhaPlant(LPCOLLISIONEVENT e)
@@ -973,7 +978,7 @@ void CMario::HandleMarioDie() {
 	else
 	{
 		DebugOut(L">>> Mario basic die >>> \n");
-		//SetState(MARIO_STATE_DIE);
+		SetState(MARIO_STATE_DIE);
 	}
 }
 void CMario::HandleTurning() {

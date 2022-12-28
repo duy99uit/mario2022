@@ -28,6 +28,9 @@
 #define ITEM_SWITCH		6
 #define SWITCH_ANI_SET_ID 77
 
+#define ITEM_MUSHROOM_GREEN 4
+#define MUSHROOM_ANI_GREEN_ID	37
+
 
 class QuestionBrick :public CGameObject
 {
