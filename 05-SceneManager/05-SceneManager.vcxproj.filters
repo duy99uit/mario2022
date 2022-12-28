@@ -151,6 +151,9 @@
     <ClCompile Include="Switch.cpp">
       <Filter>Map Objects\Items</Filter>
     </ClCompile>
+    <ClCompile Include="BrickPiece.cpp">
+      <Filter>Map Objects\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h">
@@ -245,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="Switch.h">
       <Filter>Map Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickPiece.h">
+      <Filter>Map Objects\Bricks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -298,6 +298,13 @@ void CKoopas::OnCollisionWithQuestionBrick(LPCOLLISIONEVENT e) {
 }
 
 void CKoopas::OnCollisionWithBreakableBrick(LPCOLLISIONEVENT e) {
+	// case detroy breakable brick
+	if (state == KOOPAS_STATE_TURNING) {
+		if (e->nx != 0) {
+			BreakableBrick* brk = dynamic_cast<BreakableBrick*>(e->obj);
+			brk->Break();
+		}
+	}
 	if (e->ny < 0)
 	{
 		vy = 0;
