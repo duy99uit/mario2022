@@ -20,7 +20,7 @@ FireBullet::FireBullet(float bx, float by, bool up, bool right) {
 	}
 	else
 	{
-		x = bx - BULLET_BBOX_WIDTH;
+		x = bx - BULLET_BBOX_WIDTH - BULLET_EXTRA_RANGE;
 		vx = -BULLET_SPEED_X;
 	}
 }

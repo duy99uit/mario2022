@@ -43,6 +43,7 @@ class PiranhaPlantFire :
 
 	bool Up = false;
 	bool Right = false;
+	bool idle = false;
 
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void Render();

@@ -10,6 +10,9 @@
 #define BULLET_ANI_LEFT			1	
 
 #define BULLET_ANI_SET_ID		9
+
+#define BULLET_EXTRA_RANGE  5
+
 class FireBullet :
     public CGameObject
 {
