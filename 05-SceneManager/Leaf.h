@@ -13,8 +13,11 @@
 #define LEAF_ANI_RIGHT		0
 #define LEAF_ANI_LEFT		1
 
+#define LEAF_FALLING_TIME	450
+
 class CLeaf : public CGameObject
 {
+	ULONGLONG start_timing = -1;
 public:
 
 	bool isAppear = false;
@@ -30,4 +33,5 @@ public:
 
 	virtual int IsCollidable() { return 0; };
 	int IsBlocking() { return 0; }
+	void StartTiming() { start_timing = GetTickCount64(); }
 };

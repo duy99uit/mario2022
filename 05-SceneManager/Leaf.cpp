@@ -39,6 +39,12 @@ void CLeaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			SetState(LEAF_STATE_FALLING);
 		}
 	}
+	if (state == LEAF_STATE_FALLING) {
+		if (GetTickCount64() - start_timing >= LEAF_FALLING_TIME) {
+			vx = -vx;
+			StartTiming();
+		}
+	}
 }
 
 void CLeaf::SetState(int state) {
@@ -56,6 +62,7 @@ void CLeaf::SetState(int state) {
 	case LEAF_STATE_FALLING:
 		vy = 0.025f;
 		vx = 0.075f;
+		StartTiming();
 		break;
 	}
 
