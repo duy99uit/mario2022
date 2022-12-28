@@ -252,12 +252,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 			HandleMarioDie();
 		}
 	}
-	if (e->ny > 0) {
-		if (koopas->GetState() == KOOPAS_STATE_IN_SHELL || koopas->GetState() == KOOPAS_STATE_SHELL_UP) {
-			koopas->SetState(KOOPAS_STATE_TURNING);
-		}
-	}
-	else {
+	if (e->ny != 0) {
 		DebugOut(L"mario collision with koopas if 2");
 		vy = -MARIO_JUMP_DEFLECT_SPEED_GB;
 		if (koopas->GetState() == KOOPAS_STATE_WALKING) {
@@ -839,7 +834,8 @@ void CMario::SetState(int state)
 		{
 			state = MARIO_STATE_IDLE;
 			isSitting = true;
-			vx = 0; vy = 0;
+			vx = 0;
+			vy = 0;
 			ay = 0;
 			y += MARIO_SIT_HEIGHT_ADJUST;
 		}
@@ -858,7 +854,7 @@ void CMario::SetState(int state)
 	case MARIO_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = MARIO_GRAVITY;
+		/*ay = MARIO_GRAVITY;*/
 		isJumping = false;
 		break;
 

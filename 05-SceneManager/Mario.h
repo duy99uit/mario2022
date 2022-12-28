@@ -124,7 +124,7 @@
 #define MARIO_BBOX_SIT_HEIGHT	18
 #define MARIO_SIT_HEIGHT_ADJUST	0.4f
 
-#define MARIO_UNTOUCHABLE_TIME		1000
+#define MARIO_UNTOUCHABLE_TIME		2500
 
 
 #define MARIO_STATE_KICK			411
@@ -268,6 +268,8 @@ public:
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY;
+		vy = 0;
+		vx = 0;
 
 		//level = MARIO_LEVEL_BIG;
 		level = MARIO_LEVEL_SMALL;
