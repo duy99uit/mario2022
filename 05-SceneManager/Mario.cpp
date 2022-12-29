@@ -27,9 +27,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
-	if (vy < -0.26f && level != MARIO_LEVEL_TAIL) {
+	if (vy < -0.27f && level != MARIO_LEVEL_TAIL) {
 		DebugOut(L"update vy");
-		vy = -0.26f;
+		vy = -0.27f;
+		pullDown();
+	}
+	if (vy < -0.27f && level == MARIO_LEVEL_TAIL && !isFlying) {
+		DebugOut(L"update vy");
+		vy = -0.27f;
 		pullDown();
 	}
 
@@ -974,7 +979,7 @@ void CMario::HandleMarioDie() {
 	else
 	{
 		DebugOut(L">>> Mario basic die >>> \n");
-		SetState(MARIO_STATE_DIE);
+		/*SetState(MARIO_STATE_DIE);*/
 	}
 }
 void CMario::HandleTurning() {

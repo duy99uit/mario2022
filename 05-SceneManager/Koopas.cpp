@@ -42,7 +42,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	}
 
 	// FOR HANDLE COLLISION WITH BLOCK
-	/*for (int i = 0; i < coObjects->size(); i++) {
+	for (int i = 0; i < coObjects->size(); i++) {
 		LPGAMEOBJECT obj = coObjects->at(i);
 		if (dynamic_cast<CBlock*>(obj))
 		{
@@ -53,7 +53,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				obj->SetIsBlocking(0);
 			}
 		}
-	}*/
+	}
 
 	//vy += ay * dt;
 	//vx += ax * dt;
