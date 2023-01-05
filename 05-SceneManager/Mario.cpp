@@ -27,36 +27,35 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
-	if (vy < -0.15f && level != MARIO_LEVEL_TAIL) {
+	if (vy < -0.23f && level != MARIO_LEVEL_TAIL) {
 		DebugOut(L"update vy");
-		vy = -0.15f;
+		vy = -0.23f;
 		pullDown();
 	}
-	if (vy < -0.15f && level == MARIO_LEVEL_TAIL && !isFlying) {
+	if (vy < -0.23f && level == MARIO_LEVEL_TAIL && !isFlying) {
 		DebugOut(L"update vy");
-		vy = -0.15f;
+		vy = -0.23f;
 		pullDown();
 	}
 
 	if (!isFlying)
-	HandleMarioJump();
+		HandleMarioJump();
 	HandleFlying();
 	HandleFlapping();
 	HandleTurning();
 	HandleMarioKick();
 	HandleFinishMap();
 
-	for (int i = 0; i < coObjects->size(); i++)
-	{
+	// FOR HANDLE COLLISION WITH BLOCK
+	for (int i = 0; i < coObjects->size(); i++) { // va cham nao cung su dung ( update )
 		LPGAMEOBJECT obj = coObjects->at(i);
 		if (dynamic_cast<CBlock*>(obj))
 		{
 			if (obj->getY() - 16 < this->y) {
-				obj->SetIsBlocking(0);
+				obj->SetIsBlocking(0); // xuyen qua
 			}
 			else {
-				// collision
-				obj->SetIsBlocking(1);
+				obj->SetIsBlocking(1); // va cham
 			}
 		}
 	}
@@ -144,17 +143,19 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 {
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 
-	// jump on top >> kill Goomba and deflect a bit 
 
+	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny < 0)
 	{
 		if (goomba->GetState() != GOOMBA_STATE_DIE)
 		{
-			if (goomba->tagType == GOOMBA_RED)
+			if (goomba->tagType == GOOMBA_RED) {
 				goomba->SetTagType(GOOMBA_RED_NORMAL);
-			else
+			}
+			else {
 				goomba->SetState(GOOMBA_STATE_DIE);
-			vy = -MARIO_JUMP_DEFLECT_SPEED_GB;
+			}
+			vy = -MARIO_JUMP_DEFLECT_SPEED_GB; // mario jump a little bit when collision with goomba red
 		}
 	}
 	else // hit by Goomba
@@ -164,7 +165,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 
 			if (goomba->GetState() != GOOMBA_STATE_DIE)
 			{
-				
+
 				HandleMarioDie();
 			}
 		}
@@ -805,23 +806,23 @@ void CMario::SetState(int state)
 		if (isSitting) break;
 		if (isOnPlatform)
 		{
-	
 			if (vy > -MARIO_JUMP_SPEED_MIN) {
-				DebugOut(L" vy: %f \n", vy);
+				//DebugOut(L" vy: %f \n", vy);
 				vy = -MARIO_JUMP_SPEED_MIN;
-				DebugOut(L" vy: %f \n", vy);
+				//DebugOut(L" vy: %f \n", vy);
 			}
 			ay = -MARIO_ACCELERATION_JUMP;
-
+			//DebugOut(L" ay: %d \n", ay);
+			//DebugOut(L"Jumping \n");
 		}
 		if (isRunning) {
 			if (level == MARIO_LEVEL_TAIL) {
-				DebugOut(L"mario can fly \n");
+				//DebugOut(L"mario can fly \n");
 				isFlying = true;
 				StartFlying();
 			}
 			else {
-				DebugOut(L"mario not tail \n");
+				//DebugOut(L"mario not tail \n");
 			}
 		}
 		normalFallDown = false;
@@ -829,9 +830,13 @@ void CMario::SetState(int state)
 		break;
 
 	case MARIO_STATE_RELEASE_JUMP:
+		// thay
+		//if (vy < 0) vy += MARIO_JUMP_SPEED_Y / 2;
+
+		// new
 		isJumping = false;
 		pullDown();
-		
+
 		break;
 
 	case MARIO_STATE_SIT:
@@ -843,6 +848,7 @@ void CMario::SetState(int state)
 			vy = 0;
 			ay = 0;
 			y += MARIO_SIT_HEIGHT_ADJUST;
+			DebugOut(L"sit down ay: %f, vy: %f \n", ay, vy);
 		}
 		break;
 
@@ -851,7 +857,7 @@ void CMario::SetState(int state)
 		{
 			isSitting = false;
 			state = MARIO_STATE_IDLE;
-			y -=MARIO_SIT_HEIGHT_ADJUST;
+			y -= MARIO_SIT_HEIGHT_ADJUST;
 			ay = MARIO_GRAVITY;
 		}
 		break;
@@ -859,7 +865,7 @@ void CMario::SetState(int state)
 	case MARIO_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
-		/*ay = MARIO_GRAVITY;*/
+		//ay = MARIO_GRAVITY;
 		isJumping = false;
 		break;
 

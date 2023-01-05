@@ -5,19 +5,21 @@
 #include "debug.h"
 #include "Tail.h"
 
+// normal
 #define MARIO_WALKING_SPEED		0.05f
 #define MARIO_RUNNING_SPEED		0.1f
 #define MARIO_SPEED_MAX			0.25f
+#define MARIO_ACCELERATION			0.07f
 
 #define MARIO_ACCEL_WALK_X	0.0005f
 #define MARIO_ACCEL_RUN_X	0.0007f
 
-#define MARIO_JUMP_SPEED_Y		0.35f
-#define MARIO_JUMP_RUN_SPEED_Y	0.4f
+#define MARIO_JUMP_SPEED_Y		0.5f
+#define MARIO_JUMP_RUN_SPEED_Y	0.6f
 
-#define MARIO_GRAVITY			0.0002f
+#define MARIO_GRAVITY			0.0005f
 
-#define MARIO_JUMP_DEFLECT_SPEED  0.4f
+#define MARIO_JUMP_DEFLECT_SPEED  0.3f
 #define MARIO_KICKING_TIME			200
 
 #define MARIO_STATE_DIE				-10
@@ -173,18 +175,18 @@
 
 // FLY
 #define MARIO_SPEED_STACK			0.1f // min speed to fly
-#define MARIO_FLYING_TIME			1750
-#define MARIO_NORMAL_FLY_MAX		0.35f
+#define MARIO_FLYING_TIME			1550
+#define MARIO_NORMAL_FLY_MAX		0.3f
 #define MARIO_SLOW_FALLING_SPEED	0.05f
 
 // FLAP
 
 #define MARIO_ANI_FLAPPING_RIGHT			97
-#define MARIO_ANI_FLAPPING_LEFT			98
+#define MARIO_ANI_FLAPPING_LEFT				98
 #define MARIO_ANI_FLY_UP_RIGHT				107
 #define MARIO_ANI_FLY_FLAPPING_RIGHT		109
 #define MARIO_ANI_FLY_UP_LEFT				110
-#define MARIO_ANI_FLY_FLAPPING_LEFT		112
+#define MARIO_ANI_FLY_FLAPPING_LEFT			112
 
 // KICK
 #define MARIO_ANI_TAIL_HOLD_RUNNING_RIGHT		80
@@ -193,9 +195,8 @@
 #define MARIO_ANI_TAIL_KICKING_LEFT				86
 
 #define MARIO_JUMP_DEFLECT_SPEED_GB	0.1f
+#define MARIO	0
 
-//end map
-#define MARIO_ACCELERATION			0.07f
 
 class CMario : public CGameObject
 {

@@ -352,8 +352,9 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
-	player->Render();
+	
 	current_map->DrawMap();
+	player->Render();
 
 	// zIndex Render Front - Behind
 
