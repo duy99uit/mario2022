@@ -122,5 +122,5 @@ void CSampleKeyHandler::KeyState(BYTE* states)
 		}
 	}
 	else
-		if (!mario->isTuring) mario->SetState(MARIO_STATE_IDLE);
+		if (mario->getIsOnPlatForm() && !mario->isTuring) mario->SetState(MARIO_STATE_IDLE);
 }

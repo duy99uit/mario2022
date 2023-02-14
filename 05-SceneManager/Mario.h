@@ -184,6 +184,10 @@
 
 #define MARIO_ANI_FLAPPING_RIGHT			97
 #define MARIO_ANI_FLAPPING_LEFT				98
+#define MARIO_ANI_SMALL_FLY_RIGHT			103
+#define MARIO_ANI_SMALL_FLY_LEFT			104
+#define MARIO_ANI_BIG_FLY_RIGHT				105
+#define MARIO_ANI_BIG_FLY_LEFT				106
 #define MARIO_ANI_FLY_UP_RIGHT				107
 #define MARIO_ANI_FLY_FLAPPING_RIGHT		109
 #define MARIO_ANI_FLY_UP_LEFT				110
@@ -204,6 +208,9 @@
 
 #define MARIO_MAX_JUMP_Y			0.23f
 
+#define MARIO_RUNNING_STACK_TIME	200
+#define MARIO_SPEED_STACK_LOST_TIME	200
+
 
 class CMario : public CGameObject
 {
@@ -221,6 +228,8 @@ class CMario : public CGameObject
 	ULONGLONG start_kicking = 0;
 	ULONGLONG start_turning_state = 0;
 	ULONGLONG start_turning = 0;
+	ULONGLONG start_running = 0;
+	ULONGLONG running_stop = 0;
 	BOOLEAN isJumping = false;
 
 	int coin;
@@ -275,8 +284,8 @@ public:
 	BOOLEAN isSitting;
 
 	// hud
-	/*int coin;
-	int speedStack = 0;*/
+	/*int coin;*/
+	int speedStack = 0;
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{
@@ -313,6 +322,7 @@ public:
 	int GetY() {
 		return this->y;
 	}
+	boolean getIsOnPlatForm() { return isOnPlatform; }
 
 	void OnNoCollision(DWORD dt);
 
@@ -363,6 +373,7 @@ public:
 	//end map 1-1
 	void HandleFinishMap();
 	void HandleSwitchMap();
+	void HandleSpeedStack();
 
 	// Not jumping
 	void pullDown() {

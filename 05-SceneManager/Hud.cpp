@@ -13,7 +13,8 @@
 #define HUD_DIFF_LIFE			93
 #define HUD_DIFF_SCORE			60
 #define HUD_DIFF_METTER			68
-#define HUD_DIFF_P				15
+#define HUD_DIFF_MELTER			50
+#define HUD_DIFF_P				35
 #define HUD_DIFF_CARD			48
 
 #define HUD_TIME_MAX	3
@@ -85,12 +86,30 @@ vector<LPSPRITE> HUD::StringToSprite(string str)
 
 HUD::HUD(int typeHUD) {
 	initFonts();
+	PAni = CAnimations::GetInstance()->Get(ANI_P_ID);
+	for (unsigned int i = 0; i < MARIO_RUNNING_STACKS - 1; i++) {
+		powerMelterSprite.push_back((CSprites::GetInstance()->Get(SPRITE_FILLARROW_ID)));
+	}
 }
 
 void HUD::Render() {
 	CSprites::GetInstance()->Get(SPRITE_HUD_ID)->Draw(x, y);
+	for (int i = 1; i <= speedStack; i++) {
+		if (i == MARIO_RUNNING_STACKS) {
+			if (PAni != nullptr)
+				PAni->Render(x + HUD_DIFF_P, y - HUD_DIFF_ROW);
+		}
+		else
+		{
+			powerMelterSprite[i - 1]->Draw(x + FONT_BBOX_WIDTH * (i - 1) - HUD_DIFF_METTER + HUD_DIFF_MELTER, y - 4);
+		}
+	}
 }
-
+void HUD::AddSpeedStack() {
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	mario = currentScene->GetPlayer();
+	this->speedStack = mario->speedStack;
+}
 void HUD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
-
+	AddSpeedStack();
 }

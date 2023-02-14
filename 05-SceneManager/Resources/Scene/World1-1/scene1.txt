@@ -9,7 +9,7 @@ Resources\Tilemap\world1-1.txt
 # Direction: 0 = Right; 1 = Left, null = Idle
 # Serial: Optional
 # ====	HUD ====
-99999	17	2	168	30	60
+99999	17	2	168	31	60
 # ---- icon MARIO ---- 
 50003	16	161	31	167	80
  ---- icon Lugi ---- 

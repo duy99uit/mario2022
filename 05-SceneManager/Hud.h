@@ -61,6 +61,10 @@ class HUD :public CGameObject {
 	std::map<char, LPSPRITE> fonts;
 
 	LPSPRITE playerSprite = NULL;
+	LPANIMATION PAni = NULL;
+	vector<LPSPRITE> powerMelterSprite;
+
+	int speedStack = 0;
 
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
@@ -72,5 +76,7 @@ public:
 	void initFonts();
 	LPSPRITE mappingFont(char c);
 	vector<LPSPRITE> StringToSprite(string str);
+
+	void AddSpeedStack();
 
 };
