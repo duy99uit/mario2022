@@ -2,7 +2,7 @@
 #include "debug.h"
 #include "Block.h"
 #include "PlayScene.h"
-
+#include "Block.h"
 
 CMushroom::CMushroom(int type) {
 	SetAppear(false);

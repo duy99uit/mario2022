@@ -4,6 +4,7 @@
 #include "Animations.h"
 #include "debug.h"
 #include "Tail.h"
+#include "Portal.h"
 
 // normal
 #define MARIO_WALKING_SPEED		0.05f
@@ -196,6 +197,7 @@
 
 #define MARIO_JUMP_DEFLECT_SPEED_GB	0.1f
 #define MARIO	0
+#define MARIO_GRAVITY_PIPE			0.00002f
 
 
 class CMario : public CGameObject
@@ -245,7 +247,6 @@ public:
 	BOOLEAN isKick = false;
 	// tail attack
 	BOOLEAN isTuring = false;
-	BOOLEAN isSitting;
 
 	// handle mario fly
 	BOOLEAN isFlying = false;
@@ -259,6 +260,14 @@ public:
 
 	// end game
 	bool isFinish = false;
+
+	// switch map
+	CPortal* portal = NULL;
+	BOOLEAN isPipeUp = false;
+	BOOLEAN isPipeDown = false;
+	BOOLEAN isSwitchMap = false;
+
+	BOOLEAN isSitting;
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{
@@ -304,11 +313,27 @@ public:
 	void SetLevel(int l);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 
+	void StopPipeUp() {
+		isPipeUp = false;
+	}
+	void StopPipeDown() {
+		isPipeDown = false;
+	}
+
+
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 	int GetLevel() {return this->level;}
 
 	void StartKicking() { start_kicking = GetTickCount64(); isKick = true; }
+
+	void StartPipeUp() {
+		isPipeUp = true;
+
+	}
+	void StartPipeDown() {
+		isPipeDown = true;
+	}
 
 	//tail
 	void StartTurning() { start_turning_state = GetTickCount64(); isTuring = true; }
@@ -328,6 +353,7 @@ public:
 
 	//end map 1-1
 	void HandleFinishMap();
+	void HandleSwitchMap();
 
 	// Not jumping
 	void pullDown() {
@@ -343,5 +369,9 @@ public:
 	void EndMap() { x = 2680; y = 0; };
 	void ExtraMap() { x = 2270; y = 0; };
 	void StartMap() { x = 80; y = 0; };
+	// start to extra map
+	void StartExtraMap() {
+		SetPosition(180, 1080066048);
+	};
 
 };

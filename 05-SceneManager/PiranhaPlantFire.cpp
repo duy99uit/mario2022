@@ -28,54 +28,50 @@ void PiranhaPlantFire::Render()
 void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt);
+
 	GetDirect();
 
+	// limit Y
 	if (y <= limitY && vy < 0)
 	{
 		y = limitY;
 		vy = 0;
+		//DebugOut(L"start aim \n");
+		//StartDelay();
 		StartAim();
 	}
-
 	if (y >= limitY + BBHeight && vy > 0)
 	{
 		y = limitY + BBHeight + 12;
 		SetState(PIRANHAPLANT_STATE_INACTIVE);
+		//StartDelay();
 	}
+
 	if (GetTickCount64() - aim_start >= PIRANHAPLANT_AIM_TIME && aim_start != 0)
 	{
-		DebugOut(L"start shoot ..... \n");
+		//DebugOut(L"start shoot \n");
 		aim_start = 0;
 		SetState(PIRANHAPLANT_STATE_SHOOTING);
 		StartDelay();
 	}
+
 	if (GetTickCount64() - delay_start >= PIRANHAPLANT_DELAY_TIME && delay_start != 0)
 	{
 		if (y == limitY) {
+			//DebugOut(L"start turn off \n");
 			vy = PIRANHAPLANT_DARTING_SPEED;
 		}
-
 		delay_start = 0;
 	}
-	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
-	if (mario != NULL) {
-		if (floor(mario->x) <= x - 30 || floor(mario->x) > x + 30) {
-			idle = true;
-			DebugOut(L"range active\n");
-		}
-		else {
-			idle = false;
-			DebugOut(L"range idle\n");
-		}
-	}
-	if (y > limitY && vy == 0 && aim_start == 0 && delay_start == 0 && idle)
+
+	if (y > limitY && vy == 0 && aim_start == 0 && delay_start == 0)
 	{
-		// start darting when turn off success
+		//start darting when turn off success
+		//DebugOut(L"start darting again \n");
 		SetState(PIRANHAPLANT_STATE_DARTING);
 	}
 
 	y += vy * dt;
-
 
 	// die
 	if (GetTickCount64() - die_start >= PIRANHAPLANT_DIE_TIME && die_start != 0)
@@ -83,13 +79,13 @@ void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	if (state == PIRANHAPLANT_STATE_DEATH)
 		return;
-
 	float mLeft, mTop, mRight, mBottom;
-
+	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	if (mario->GetLevel() == MARIO_LEVEL_TAIL) {
 		mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
 
 		if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom) && mario->isTuring) {
+			DebugOut(L"PiranhaPlantFire die by mario tail \n");
 			SetState(PIRANHAPLANT_STATE_DEATH);
 		}
 	}

@@ -543,6 +543,35 @@ void CGame::_ParseSection_TEXTURES(string line)
 	CTextures::GetInstance()->Add(texID, path.c_str());
 }
 
+void CGame::SwitchExtraScene(int scene_id, float start_x, float start_y)
+{
+	DebugOut(L"[INFO] SwitchExtraScene to scene %d %d %d\n", scene_id, start_x, start_y);
+
+	bool isHaveToReload = true;
+	bool isReadyToSwitch = true;
+	if (next_scene == scene_id)
+		isHaveToReload = false;
+
+	//switch scene
+	next_scene = current_scene;
+	current_scene = scene_id;
+	LPSCENE s = scenes[scene_id];
+	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
+
+	//load extra scene
+	if (isHaveToReload) {
+		s->Load();
+	}
+	//put player to extra scene
+	if (isReadyToSwitch) {
+		CMario* omario = ((CPlayScene*)scenes[next_scene])->GetPlayer();
+		omario->SetPosition(start_x, start_y);
+		((CPlayScene*)s)->SetPlayer(omario);
+		DebugOut(L"Put player successfull \n");
+	}
+		
+}
+
 
 CGame::~CGame()
 {

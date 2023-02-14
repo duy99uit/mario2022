@@ -57,6 +57,9 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_C:
 		mario->StartMap();
 		break;
+	case DIK_V:
+		mario->StartExtraMap();
+		break;
 	}
 
 }

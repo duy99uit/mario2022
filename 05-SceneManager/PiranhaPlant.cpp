@@ -19,7 +19,10 @@ PiranhaPlant::PiranhaPlant()
 void PiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt, coObjects);
-
+	if (GetTickCount64() - dying_start >= PIRANHAPLANT_DIYING_TIME && dying_start != 0)
+		isDeleted = true;
+	if (state == PIRANHAPLANT_STATE_DEATH)
+		return;
 	if (y <= limitY && vy < 0)
 	{
 		y = limitY;
@@ -48,6 +51,7 @@ void PiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom) && mario->isTuring) {
 			DebugOut(L"PiranhaPlant die by mario tail \n");
 			//SetState();
+			SetState(PIRANHAPLANT_STATE_DEATH);
 		}
 	}
 
@@ -62,7 +66,9 @@ void PiranhaPlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void PiranhaPlant::Render()
 {
-	int ani = PIRANHAPLANT_ANI_IDLE;
+	int ani = PIRANHAPLANT_ANI_DEATH;
+	if (state != PIRANHAPLANT_STATE_DEATH && dying_start == 0)
+		ani = PIRANHAPLANT_ANI_IDLE;
 
 	animation_set->at(ani)->Render(x, y);
 	RenderBoundingBox();
@@ -84,6 +90,9 @@ void PiranhaPlant::SetState(int _state)
 	case PIRANHAPLANT_STATE_INACTIVE:
 		vy = 0;
 		StartBitting();
+		break;
+	case PIRANHAPLANT_STATE_DEATH:
+		vy = 0;
 		break;
 	}
 }

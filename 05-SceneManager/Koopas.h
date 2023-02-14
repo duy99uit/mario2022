@@ -73,6 +73,7 @@ public:
 	void OnCollisionWithKoopas(LPCOLLISIONEVENT e);
 	void OnCollisionWithQuestionBrick(LPCOLLISIONEVENT e);
 	void OnCollisionWithBreakableBrick(LPCOLLISIONEVENT e);
+	void OnCollisionWithPlan(LPCOLLISIONEVENT e);
 
 	// check collision with block
 	bool KoopasCollision(LPGAMEOBJECT object);

@@ -45,6 +45,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	HandleTurning();
 	HandleMarioKick();
 	HandleFinishMap();
+	HandleSwitchMap();
 
 	// FOR HANDLE COLLISION WITH BLOCK
 	for (int i = 0; i < coObjects->size(); i++) { // va cham nao cung su dung ( update )
@@ -180,8 +181,8 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 
 void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
 {
-	CPortal* p = (CPortal*)e->obj;
-	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
+	portal = (CPortal*)e->obj;
+	//CGame::GetInstance()->InitiateSwitchScene(portal->GetSceneId());
 }
 
 void CMario::OnCollisionWithQuestionBrick(LPCOLLISIONEVENT e)
@@ -240,27 +241,35 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 
 	CKoopas* koopas = dynamic_cast<CKoopas*>(e->obj);
 
-	DebugOut(L"in mario collision with koopas \n");
+	//DebugOut(L"in mario collision with koopas \n");
 
 	if (e->nx != 0) {
-		DebugOut(L"mario collision with koopas if 1");
+		//DebugOut(L"mario collision with koopas if 1");
 		if (koopas->GetState() == KOOPAS_STATE_IN_SHELL || koopas->GetState() == KOOPAS_STATE_SHELL_UP) {
 			if (isReadyToHold) {
+				//DebugOut(L"mario can hold koopas \n");
 				isHolding = true;
 				koopas->SetCanBeHeld(true);
 			}
 			else {
+				//DebugOut(L"mario kick koopas \n");
 				SetState(MARIO_STATE_KICK);
 				koopas->SetState(KOOPAS_STATE_TURNING);
 			}
 		}
 		else {
+			//if (MARIO_LEVEL_BIG) {
+			//	SetLevel(MARIO_LEVEL_SMALL);
+			//}
+			//else{
+			//	DebugOut(L"Mario die by koopas \n");
+			//	//SetState(MARIO_STATE_DIE);
+			//}
 			HandleMarioDie();
 		}
 	}
-	if (e->ny != 0) {
-		DebugOut(L"mario collision with koopas if 2");
-		vy = -MARIO_JUMP_DEFLECT_SPEED_GB;
+	else if (e->ny != 0) {
+		//DebugOut(L"mario collision with koopas if 2");
 		if (koopas->GetState() == KOOPAS_STATE_WALKING) {
 			if (koopas->tagType == KOOPAS_GREEN_PARA) {
 				koopas->SetTagType(KOOPAS_GREEN);
@@ -865,7 +874,7 @@ void CMario::SetState(int state)
 	case MARIO_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
-		//ay = MARIO_GRAVITY;
+		ay = MARIO_GRAVITY;
 		isJumping = false;
 		break;
 
@@ -1044,5 +1053,25 @@ void CMario::HandleFinishMap() {
 		vx = MARIO_WALKING_SPEED;
 		DebugOut(L"HandleFinishMap Mario collision with Card and go to right - end 1 -1 \n");
 		SetState(MARIO_STATE_WALKING_RIGHT);
+	}
+}
+void CMario::HandleSwitchMap() {
+	if (isSitting && isSwitchMap && isPipeDown)
+	{
+		// mario go down
+		DebugOut(L"mario can go down \n");
+		CGame::GetInstance()->SwitchExtraScene(portal->GetSceneId(), portal->start_x, portal->start_y);
+		vx = vy = 0;
+		ay = MARIO_GRAVITY_PIPE;
+		StopPipeDown();
+	}
+	if (isSwitchMap && isPipeUp)
+	{
+		// mario go up
+		DebugOut(L"mario can go up \n");
+		CGame::GetInstance()->SwitchExtraScene(portal->GetSceneId(), portal->start_x, portal->start_y);
+		vx = vy = 0;
+		ay = MARIO_GRAVITY_PIPE;
+		StopPipeUp();
 	}
 }
