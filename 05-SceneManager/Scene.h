@@ -36,6 +36,7 @@ public:
 		this->key_handler = NULL;
 	}
 	bool isUnLoaded = false;
+	int GetSceneId() { return id; }
 
 	int GetId() { return id; }
 	void SetCamerAutoMove(bool l) { this->isCameraAutoMove = l; }

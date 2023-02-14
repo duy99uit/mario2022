@@ -154,6 +154,9 @@
     <ClCompile Include="BrickPiece.cpp">
       <Filter>Map Objects\Bricks</Filter>
     </ClCompile>
+    <ClCompile Include="Hud.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h">
@@ -251,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="BrickPiece.h">
       <Filter>Map Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="Hud.h">
+      <Filter>HUD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

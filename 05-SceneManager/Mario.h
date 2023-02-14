@@ -195,9 +195,14 @@
 #define MARIO_ANI_TAIL_HOLD_RUNNING_LEFT		84
 #define MARIO_ANI_TAIL_KICKING_LEFT				86
 
+// HUD
+#define MARIO_RUNNING_STACKS		7
+
 #define MARIO_JUMP_DEFLECT_SPEED_GB	0.1f
 #define MARIO	0
 #define MARIO_GRAVITY_PIPE			0.00002f
+
+#define MARIO_MAX_JUMP_Y			0.23f
 
 
 class CMario : public CGameObject
@@ -268,6 +273,10 @@ public:
 	BOOLEAN isSwitchMap = false;
 
 	BOOLEAN isSitting;
+
+	// hud
+	/*int coin;
+	int speedStack = 0;*/
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{

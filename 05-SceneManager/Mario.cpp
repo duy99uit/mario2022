@@ -27,14 +27,14 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
-	if (vy < -0.23f && level != MARIO_LEVEL_TAIL) {
+	if (vy < -MARIO_MAX_JUMP_Y && level != MARIO_LEVEL_TAIL) {
 		DebugOut(L"update vy");
-		vy = -0.23f;
+		vy = -MARIO_MAX_JUMP_Y;
 		pullDown();
 	}
-	if (vy < -0.23f && level == MARIO_LEVEL_TAIL && !isFlying) {
+	if (vy < -MARIO_MAX_JUMP_Y && level == MARIO_LEVEL_TAIL && !isFlying) {
 		DebugOut(L"update vy");
-		vy = -0.23f;
+		vy = -MARIO_MAX_JUMP_Y;
 		pullDown();
 	}
 
@@ -268,7 +268,8 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 			HandleMarioDie();
 		}
 	}
-	else if (e->ny != 0) {
+	if (e->ny != 0) {
+		vy = -MARIO_JUMP_DEFLECT_SPEED_GB;
 		//DebugOut(L"mario collision with koopas if 2");
 		if (koopas->GetState() == KOOPAS_STATE_WALKING) {
 			if (koopas->tagType == KOOPAS_GREEN_PARA) {
@@ -845,7 +846,6 @@ void CMario::SetState(int state)
 		// new
 		isJumping = false;
 		pullDown();
-
 		break;
 
 	case MARIO_STATE_SIT:
@@ -874,7 +874,7 @@ void CMario::SetState(int state)
 	case MARIO_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = MARIO_GRAVITY;
+		//ay = MARIO_GRAVITY;
 		isJumping = false;
 		break;
 
