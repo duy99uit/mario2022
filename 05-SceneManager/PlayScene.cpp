@@ -20,6 +20,7 @@
 #include "Card.h"
 #include "BreakableBrick.h"
 #include "Hud.h"
+#include "Mario.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
@@ -349,8 +350,13 @@ void CPlayScene::Update(DWORD dt)
 	{
 		coObjects.push_back(objects[i]);
 	}
-
-	player->Update(dt, &coObjects);
+	CMario* mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	if (mario->isSW) {
+		player->Update(dt * multiScene, &coObjects);
+	}
+	else {
+		player->Update(dt, &coObjects);
+	}
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{

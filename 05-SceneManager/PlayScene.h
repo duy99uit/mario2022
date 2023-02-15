@@ -30,7 +30,7 @@ protected:
 
 public:
 	bool isTurnOnCamY = false;
-
+	float multiScene = 1.65;
 	CPlayScene(int id, LPCWSTR filePath);
 
 	virtual void Load();

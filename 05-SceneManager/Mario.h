@@ -175,10 +175,11 @@
 #define MARIO_TURNING_TAIL_TIME		350
 
 // FLY
-#define MARIO_SPEED_STACK			0.1f // min speed to fly
+/*#define MARIO_SPEED_STACK			0.1f */// min speed to fly
+#define MARIO_SPEED_STACK			0.075f
 #define MARIO_FLYING_TIME			1550
 #define MARIO_NORMAL_FLY_MAX		0.3f
-#define MARIO_SLOW_FALLING_SPEED	0.03f
+#define MARIO_SLOW_FALLING_SPEED	0.02f
 
 // FLAP
 
@@ -210,6 +211,8 @@
 
 #define MARIO_RUNNING_STACK_TIME	200
 #define MARIO_SPEED_STACK_LOST_TIME	200
+
+#define MARIO_TOP_EXTRA		3.5
 
 
 class CMario : public CGameObject
@@ -281,9 +284,13 @@ public:
 
 	BOOLEAN isSitting;
 
+	BOOLEAN isSW = false;
+
 	// hud
 	int coin;
 	int speedStack = 0;
+
+	BOOLEAN isExtraTop = false; // for tail
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{
@@ -389,7 +396,7 @@ public:
 	void StartMap() { x = 80; y = 0; };
 	// start to extra map
 	void StartExtraMap() {
-		SetPosition(180, 1080066048);
+		SetPosition(1500, 0);
 	};
 
 };

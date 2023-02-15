@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Animations.h"
+#include "Mario.h"
 
 #define COIN_STATE_IDLE		0
 

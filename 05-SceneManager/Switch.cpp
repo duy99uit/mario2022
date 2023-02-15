@@ -57,6 +57,7 @@ void Switch::GetBoundingBox(float& l, float& t, float& r, float& b)
 void Switch::ChangeBreakBrickToCoin() {
 	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 	vector<LPGAMEOBJECT> objects = currentScene->GetObjects();
+	CMario* mario = currentScene->GetPlayer();
 	//DebugOut(L"Obj: %d \n", objects.size());
 	CAnimationSets* animation_sets = CAnimationSets::GetInstance();
 	LPANIMATION_SET ani_set = animation_sets->Get(COIN_ANI_SET_ID);
@@ -67,6 +68,7 @@ void Switch::ChangeBreakBrickToCoin() {
 			BreakableBrick* bBrick = dynamic_cast<BreakableBrick*>(objects.at(i));
 			CCoin* coin = new CCoin();
 			coin->SetPosition(bBrick->x, bBrick->y);
+			mario->isExtraTop = true;
 			coin->SetAppear(true);
 			coin->SetAnimationSet(ani_set);
 			currentScene->AddObjectToScene(coin);

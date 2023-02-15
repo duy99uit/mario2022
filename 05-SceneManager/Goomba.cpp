@@ -123,7 +123,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	float oLeft, oTop, oRight, oBottom;
 
 	if (mario != NULL && state != GOOMBA_STATE_DIE) {
-		if (tagType == GOOMBA_RED && mario->isTuring && mario->GetLevel() == MARIO_LEVEL_TAIL) {
+		if (mario->isTuring && mario->GetLevel() == MARIO_LEVEL_TAIL) {
 			mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
 			GetBoundingBox(oLeft, oTop, oRight, oBottom);
 			if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom))
@@ -135,18 +135,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				return;
 			}
 		}
-		else if ((tagType != GOOMBA_RED || tagType == GOOMBA_RED_NORMAL) && mario->isTuring && mario->GetLevel() == MARIO_LEVEL_TAIL && state != GOOMBA_STATE_DIE && state != GOOMBA_STATE_DIE_BY_MARIO)
-		{
-			mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
-			GetBoundingBox(oLeft, oTop, oRight, oBottom);
-			if (isColliding(floor(mLeft), mTop, ceil(mRight), mBottom))
-			{
-				nx = mario->nx;
-				DebugOut(L"goomba die by mario tail \n");
-				SetState(GOOMBA_STATE_DIE);
-				return;
-			}
-		}
+		
 	}
 
 	CGameObject::Update(dt, coObjects);
