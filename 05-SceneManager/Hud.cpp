@@ -94,26 +94,26 @@ HUD::HUD(int typeHUD) {
 
 void HUD::Render() {
 	// for hub
-	CSprites::GetInstance()->Get(SPRITE_HUD_ID)->Draw(x, y);
+	CSprites::GetInstance()->Get(SPRITE_HUD_ID)->Draw(x, y - 7);
 	// for running stack
 	for (int i = 1; i <= speedStack; i++) {
 		if (i == MARIO_RUNNING_STACKS) {
 			if (PAni != nullptr)
-				PAni->Render(x + HUD_DIFF_P, y - HUD_DIFF_ROW);
+				PAni->Render(x + HUD_DIFF_P, y - HUD_DIFF_ROW - 7);
 		}
 		else
 		{
-			powerMelterSprite[i - 1]->Draw(x + FONT_BBOX_WIDTH * (i - 1) - HUD_DIFF_METTER + HUD_DIFF_MELTER, y - 4);
+			powerMelterSprite[i - 1]->Draw(x + FONT_BBOX_WIDTH * (i - 1) - HUD_DIFF_METTER + HUD_DIFF_MELTER, y - 11);
 		}
 	}
 	// for coin
 	for (unsigned int i = 0; i < moneySprites.size(); i++) {
-		moneySprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_MONEY + HUD_DIFF_MELTER - 1, y - HUD_DIFF_ROW);
+		moneySprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_MONEY + HUD_DIFF_MELTER - 1, y - HUD_DIFF_ROW - 7);
 	}
 
 	// for time
 	for (unsigned int i = 0; i < remainTimeSprites.size(); i++) {
-		remainTimeSprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_TIME + HUD_DIFF_MELTER - 1, y + HUD_DIFF_ROW);
+		remainTimeSprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_TIME + HUD_DIFF_MELTER - 1, y + HUD_DIFF_ROW - 7);
 	}
 }
 void HUD::AddSpeedStack() {

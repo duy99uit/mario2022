@@ -27,12 +27,12 @@ void CardItem::Render() {
 	if (state == 3) {
 		ani = CARD_ANI_STAR;
 	}
-
 	animation_set->at(ani)->Render(x, y);
 }
 
 void CardItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
+	CGameObject::Update(dt);
 	if (start == 0) {
 		start = GetTickCount64();
 	}
@@ -43,6 +43,4 @@ void CardItem::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		}
 		start = 0;
 	}
-
-	CGameObject::Update(dt);
 }

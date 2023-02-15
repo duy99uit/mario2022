@@ -95,6 +95,12 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		return;
 	}
 
+	if (ID == GAMEDONE1_SPRITE_ID) {
+		DebugOut(L"game done true \n");
+		gamedone = CSprites::GetInstance()->Get(ID);
+	}
+
+
 	CSprites::GetInstance()->Add(ID, l, t, r, b, tex);
 }
 
@@ -388,6 +394,23 @@ void CPlayScene::Render()
 		objects[i]->Render();
 	}
 	hud->Render();
+
+	// end game text
+	CMario* mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	if (mario->isFinish) {
+		CSprites::GetInstance()->Get(GAMEDONE1_SPRITE_ID)->Draw(2688, 270);
+		CSprites::GetInstance()->Get(GAMEDONE1_SPRITE_ID_1)->Draw(2688, 300);
+		DebugOut(L"mario->cardItemSc: %d \n", mario->cardItemSc);
+		if (mario->cardItemSc == 1) {
+			CSprites::GetInstance()->Get(CARD_MUSHROOM)->Draw(2750, 300);
+		}
+		else if (mario->cardItemSc == 2) {
+			CSprites::GetInstance()->Get(CARD_FIREFLOWER)->Draw(2750, 300);
+		}
+		else if (mario->cardItemSc == 3) {
+			CSprites::GetInstance()->Get(CARD_STAR)->Draw(2750, 300);
+		}
+	}
 }
 
 void CPlayScene::SetCam(float cx, float cy, DWORD dt) {

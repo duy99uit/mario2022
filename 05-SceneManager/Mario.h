@@ -291,6 +291,7 @@ public:
 	int speedStack = 0;
 
 	BOOLEAN isExtraTop = false; // for tail
+	int cardItemSc;
 
 	CMario(float x, float y) : CGameObject(x, y)
 	{
@@ -391,7 +392,7 @@ public:
 	void HandleMarioDie();
 
 	// change position
-	void EndMap() { x = 2680; y = 0; };
+	void EndMap() { x = 2688; y = 0; };
 	void ExtraMap() { x = 2270; y = 0; };
 	void StartMap() { x = 80; y = 0; };
 	// start to extra map

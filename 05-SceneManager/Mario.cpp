@@ -306,6 +306,8 @@ void CMario::OnCollisionWithCardItem(LPCOLLISIONEVENT e) {
 		card->SetAppear(false);
 		card->isDeleted = true;
 		isFinish = true;
+		cardItemSc = card->getState();
+		DebugOut(L"get state card:: %d \n", card->getState());
 	}
 }
 void CMario::OnCollisionWithFireBullet(LPCOLLISIONEVENT e) {
@@ -1105,7 +1107,7 @@ void CMario::HandleFinishMap() {
 		ay = MARIO_GRAVITY;
 		nx = 1;
 		vx = MARIO_WALKING_SPEED;
-		DebugOut(L"HandleFinishMap Mario collision with Card and go to right - end 1 -1 \n");
+		//DebugOut(L"Mario collision with Card and go to right - end game \n");
 		SetState(MARIO_STATE_WALKING_RIGHT);
 	}
 }
