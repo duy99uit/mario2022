@@ -178,7 +178,7 @@
 #define MARIO_SPEED_STACK			0.1f // min speed to fly
 #define MARIO_FLYING_TIME			1550
 #define MARIO_NORMAL_FLY_MAX		0.3f
-#define MARIO_SLOW_FALLING_SPEED	0.05f
+#define MARIO_SLOW_FALLING_SPEED	0.03f
 
 // FLAP
 
@@ -232,8 +232,6 @@ class CMario : public CGameObject
 	ULONGLONG running_stop = 0;
 	BOOLEAN isJumping = false;
 
-	int coin;
-
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
@@ -284,7 +282,7 @@ public:
 	BOOLEAN isSitting;
 
 	// hud
-	/*int coin;*/
+	int coin;
 	int speedStack = 0;
 
 	CMario(float x, float y) : CGameObject(x, y)

@@ -93,7 +93,9 @@ HUD::HUD(int typeHUD) {
 }
 
 void HUD::Render() {
+	// for hub
 	CSprites::GetInstance()->Get(SPRITE_HUD_ID)->Draw(x, y);
+	// for running stack
 	for (int i = 1; i <= speedStack; i++) {
 		if (i == MARIO_RUNNING_STACKS) {
 			if (PAni != nullptr)
@@ -104,6 +106,15 @@ void HUD::Render() {
 			powerMelterSprite[i - 1]->Draw(x + FONT_BBOX_WIDTH * (i - 1) - HUD_DIFF_METTER + HUD_DIFF_MELTER, y - 4);
 		}
 	}
+	// for coin
+	for (unsigned int i = 0; i < moneySprites.size(); i++) {
+		moneySprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_MONEY + HUD_DIFF_MELTER - 1, y - HUD_DIFF_ROW);
+	}
+
+	// for time
+	for (unsigned int i = 0; i < remainTimeSprites.size(); i++) {
+		remainTimeSprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_TIME + HUD_DIFF_MELTER - 1, y + HUD_DIFF_ROW);
+	}
 }
 void HUD::AddSpeedStack() {
 	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
@@ -112,4 +123,18 @@ void HUD::AddSpeedStack() {
 }
 void HUD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	AddSpeedStack();
+	AddCoin();
+	// for coin
+	moneySprites = StringToSprite(to_string(money));
+
+	// for time
+	time += dt;
+	remainTime = DEFAULT_TIME - time / 1000;
+	string time_str = to_string(remainTime);
+	while (time_str.length() < HUD_TIME_MAX) time_str = "0" + time_str;
+	remainTimeSprites = StringToSprite(time_str);
+}
+void HUD::AddCoin() {
+	if (mario != NULL)
+		this->money = mario->coin;
 }

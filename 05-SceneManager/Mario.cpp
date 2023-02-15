@@ -858,7 +858,7 @@ void CMario::SetState(int state)
 			//DebugOut(L" ay: %d \n", ay);
 			//DebugOut(L"Jumping \n");
 		}
-		if (isRunning) {
+		if (isRunning && speedStack > 5) {
 			if (level == MARIO_LEVEL_TAIL) {
 				//DebugOut(L"mario can fly \n");
 				isFlying = true;
@@ -909,6 +909,7 @@ void CMario::SetState(int state)
 		vx = 0.0f;
 		//ay = MARIO_GRAVITY;
 		isJumping = false;
+		isRunning = false;
 		/*speedStack = 0;*/
 		break;
 
@@ -1054,14 +1055,14 @@ void CMario::HandleFlying() {
 		if (isFlying)
 		{
 			if (vy <= -MARIO_NORMAL_FLY_MAX) {
-				ay = 0.00025f;
+				
 				normalFallDown = true;
 				DebugOut(L"Start fall down \n");
 			}
 		}
 	}
 	if (normalFallDown && isFlying) {
-		ay = 0.0005f;
+		ay = 0.00025f;
 	}
 
 	// handle fly
@@ -1113,7 +1114,7 @@ void CMario::HandleSwitchMap() {
 }
 
 void CMario::HandleSpeedStack() {
-	if (GetTickCount64() - start_running > MARIO_RUNNING_STACK_TIME && isRunning && vx != 0 && isReadyToRun) {
+	if (GetTickCount64() - start_running > MARIO_RUNNING_STACK_TIME && vx != 0 && isRunning && isReadyToRun) {
 		start_running = GetTickCount64();
 		speedStack++;
 		DebugOut(L"SpeedStack:: %d \n", speedStack);
