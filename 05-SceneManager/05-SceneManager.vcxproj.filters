@@ -160,6 +160,15 @@
     <ClCompile Include="IntroScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="WorldScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="WMObject.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldPlayer.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h">
@@ -262,6 +271,15 @@
       <Filter>HUD</Filter>
     </ClInclude>
     <ClInclude Include="IntroScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="WMObject.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldPlayer.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
