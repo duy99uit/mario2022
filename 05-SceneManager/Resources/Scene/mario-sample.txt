@@ -1,5 +1,5 @@
 [SETTINGS]
-start	1
+start	3
 width	320
 height	240
 #id		path		type		isCameraMove
@@ -7,10 +7,12 @@ height	240
 0	Resources\Scene\worldscene.txt	1	1
 1	Resources\Scene\World1-1\scene1.txt	2	0
 2	Resources\Scene\World1-1\scene1_Extra.txt	2	0
+3	Resources\Scene\introscene.txt
 [TEXTURES]
 # id	file_path	
 0	Resources\Textures\mario.png	
-1	Resources\Textures\mar.png	
+1	Resources\Textures\mar.png
+2	Resources\Textures\title.png	
 10	Resources\Textures\enemies.png	
 20	Resources\Textures\misc.png	
 21	Resources\Textures\misc2.png	

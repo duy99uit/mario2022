@@ -157,6 +157,9 @@
     <ClCompile Include="Hud.cpp">
       <Filter>HUD</Filter>
     </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h">
@@ -257,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="Hud.h">
       <Filter>HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
