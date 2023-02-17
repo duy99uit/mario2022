@@ -214,6 +214,8 @@
 
 #define MARIO_TOP_EXTRA		3.5
 
+#define MARIO_FALLING_AY			 0.0005f;
+
 
 class CMario : public CGameObject
 {

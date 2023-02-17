@@ -1103,7 +1103,7 @@ void CMario::HandleFlying() {
 		}
 	}
 	if (normalFallDown && isFlying) {
-		ay = 0.0005f;
+		ay = MARIO_FALLING_AY;
 	}
 
 	// handle fly

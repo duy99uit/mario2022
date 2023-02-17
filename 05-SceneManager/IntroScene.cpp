@@ -224,7 +224,7 @@ void IntroSceneKeyHandler::OnKeyDown(int KeyCode)
 	CIntroScene* intro = ((CIntroScene*)CGame::GetInstance()->GetCurrentScene());
 	switch (KeyCode)
 	{
-	case DIK_A:
+	case DIK_S:
 		intro->switchTimer = GetTickCount64();
 		intro->isSwitch = true;
 		DebugOut(L"Enter to switch scene \n");
