@@ -3,7 +3,7 @@
 
 PiranhaPlantFire::PiranhaPlantFire(int tag) {
 	this->tagType = tag;
-	SetState(PIRANHAPLANT_STATE_DARTING);
+	SetState(PIRANHAPLANT_STATE_INACTIVE);
 }
 
 void PiranhaPlantFire::Render()
@@ -63,8 +63,27 @@ void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		}
 		delay_start = 0;
 	}
+	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	if (mario != NULL) {
+		if (floor(mario->x) <= x - 130 || floor(mario->x) > x + 130) {
+			idle = false;
+			//DebugOut(L"range idle\n");
+		}
+		else if (floor(mario->x) <= x - 30 || floor(mario->x) > x + 30) {
+			idle = true;
+			//DebugOut(L"range active\n");
+			//DebugOut(L"x for piranha:: %f \n", this->x);
+			//DebugOut(L"x for mario:: %f \n", mario->x);
+		}
+		else if (floor(mario->x) > x - 30 || floor(mario->x) < x + 30) {
+			idle = false;
+			//DebugOut(L"range idle\n");
+		}
 
-	if (y > limitY && vy == 0 && aim_start == 0 && delay_start == 0)
+	}
+
+
+	if (y > limitY && vy == 0 && aim_start == 0 && delay_start == 0 && idle)
 	{
 		//start darting when turn off success
 		//DebugOut(L"start darting again \n");
@@ -74,7 +93,7 @@ void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	y += vy * dt;
 
 	// die
-	if (GetTickCount64() - die_start >= PIRANHAPLANT_DIE_TIME && die_start != 0)
+	if (GetTickCount64() - die_start >= PIRANHAPLANT_DIYING_TIME && die_start != 0)
 		isDeleted = true;
 
 	if (state == PIRANHAPLANT_STATE_DEATH)
