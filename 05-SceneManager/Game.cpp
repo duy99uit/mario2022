@@ -536,6 +536,7 @@ void CGame::SwitchScene(int scene_id)
 
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();
+	CAnimationSets::GetInstance()->Clear();
 
 	current_scene = next_scene;
 	LPSCENE s = scenes[next_scene];

@@ -7,6 +7,10 @@
 #include "Sprites.h"
 #include "Brick.h"
 #include "debug.h"
+#include "WMObject.h"
+#include "Mario.h"
+#define WORLDOBJECT		10
+
 
 
 using namespace std;
@@ -129,6 +133,44 @@ void CWorldScene::_ParseSection_OBJECTS(string line)
 
 	CAnimationSets* animation_sets = CAnimationSets::GetInstance();
 	CGameObject* obj = NULL;
+
+	switch (object_type)
+	{
+	case OBJECT_TYPE_PLAYER:
+		if (player != NULL)
+		{
+			DebugOut(L"[ERROR] PLAYER object was created before!\n");
+			return;
+		}
+		obj = new CWorldPlayer(x, y);
+		player = (CWorldPlayer*)obj;
+		DebugOut(L"[INFO] Player object created! %f %f\n", x, y);
+		break;
+	case WORLDOBJECT:
+		if (tag == OBJECT_TYPE_PORTAL || tag == OBJECT_TYPE_STOP)
+		{
+			bool cgLeft, cgRight, cgUp, cgDown;
+			cgLeft = atof(tokens[5].c_str());
+			cgUp = atof(tokens[6].c_str());
+			cgRight = atof(tokens[7].c_str());
+			cgDown = atof(tokens[8].c_str());
+			int sceneid = atof(tokens[9].c_str());
+			obj = new CWorldMapObject(sceneid);
+			((CWorldMapObject*)obj)->SetMove(cgLeft, cgUp, cgRight, cgDown);
+			obj->SetTagType(tag);
+		}
+		else
+		{
+			obj = new CWorldMapObject();
+			obj->SetTagType(tag);
+			if (tag == OBJECT_TYPE_HAMMER)
+				obj->SetSpeed(MARIO_WALKING_SPEED_MIN / 2, 0);
+		}
+		break;
+	default:
+		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
+		return;
+	}
 
 	// General object setup
 	obj->SetPosition(x, y);
@@ -265,6 +307,7 @@ void CWorldScene::Unload()
 	delete current_map;
 	delete hud;
 
+	player = nullptr;
 	current_map = nullptr;
 	hud = nullptr;
 
@@ -272,5 +315,35 @@ void CWorldScene::Unload()
 }
 void CWorldSceneKeyHandler::OnKeyDown(int KeyCode)
 {
-	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
+	CWorldPlayer* player = ((CWorldScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
+	if (player != NULL)
+	{
+		switch (KeyCode)
+		{
+		case DIK_RIGHT:
+			if (player->cgRight)
+				player->SetState(PLAYER_STATE_RIGHT);
+			break;
+		case DIK_LEFT:
+			if (player->cgLeft)
+				player->SetState(PLAYER_STATE_LEFT);
+			break;
+		case DIK_UP:
+			if (player->cgUp)
+				player->SetState(PLAYER_STATE_UP);
+			break;
+		case DIK_DOWN:
+			if (player->cgDown)
+				player->SetState(PLAYER_STATE_DOWN);
+			break;
+		case DIK_A:
+		{
+			DebugOut(L"mario go to play scene \n");
+			player->GoToPlayScene();
+		}
+
+		break;
+		}
+	}
 }

@@ -19,7 +19,24 @@ public:
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual int IsCollidable() { return 1; };
-	virtual int IsBlocking() { return 1; }
+	virtual int IsBlocking() { return 0; }
 	CWorldMapObject(int sceneId = -1);
 	int GetSceneId() { return sceneId; };
+
+	//
+	bool cgLeft, cgRight, cgUp, cgDown;
+	void SetMove(bool cLeft, bool cUp, bool cRight, bool cDown)
+	{
+		cgLeft = cLeft;
+		cgRight = cRight;
+		cgUp = cUp;
+		cgDown = cDown;
+	};
+	void GetMove(bool& cLeft, bool& cUp, bool& cRight, bool& cDown)
+	{
+		cLeft = cgLeft;
+		cRight = cgRight;
+		cUp = cgUp;
+		cDown = cgDown;
+	};
 };

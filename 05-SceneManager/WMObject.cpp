@@ -7,7 +7,10 @@ CWorldMapObject::CWorldMapObject(int sceneId)
 }
 void CWorldMapObject::Render()
 {
-	animation_set->at(0)->Render(x, y);
+	if (tagType == OBJECT_TYPE_HAMMER && vx < 0)
+		animation_set->at(1)->Render(x, y);
+	else
+		animation_set->at(0)->Render(x, y); animation_set->at(0)->Render(x, y);
 	RenderBoundingBox();
 }
 void CWorldMapObject::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
