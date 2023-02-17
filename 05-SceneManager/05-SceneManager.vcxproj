@@ -166,6 +166,7 @@
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="QuestionBrick.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Mushroom.h" />
     <ClInclude Include="PiranhaPlant.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="QuestionBrick.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />

@@ -245,6 +245,10 @@ void CKoopas::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 		if (koopas->tagType == KOOPAS_GREEN_PARA)
 			koopas->tagType = KOOPAS_GREEN;
 		DebugOut(L"Koopas die by koopas turning \n");
+		SetState(KOOPAS_STATE_DEATH);
+		CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		CMario* mario = currentScene->GetPlayer();
+		mario->InitScore(this->x, this->y, 100);
 		//SetState();
 	}
 	else {
@@ -354,6 +358,9 @@ void CKoopas::OnCollisionWithPlan(LPCOLLISIONEVENT e) {
 		//DebugOut(L"Plant die by koopas turning \n");
 		piranhaPlant->SetState(PIRANHAPLANT_STATE_DEATH);
 		piranhaPlantFire->SetState(PIRANHAPLANT_STATE_DEATH);
+		CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		CMario* mario = currentScene->GetPlayer();
+		mario->InitScore(this->x, this->y, 100);
 	}
 }
 
@@ -375,7 +382,7 @@ void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& botto
 void CKoopas::Render()
 {
 	int ani = -1;
-	if (state == KOOPAS_STATE_SHELL_UP)
+	if (state == KOOPAS_STATE_SHELL_UP || state == KOOPAS_STATE_DEATH)
 		ani = KOOPAS_ANI_SHELL_UP;
 	else if (state == KOOPAS_STATE_IN_SHELL)
 		ani = KOOPAS_ANI_SHELL;
@@ -394,11 +401,13 @@ void CKoopas::Render()
 	}
 
 	// koopas green
-	if (tagType == KOOPAS_GREEN_PARA)
-		if (this->nx < 0)
-			ani = KOOPAS_ANI_PARA_LEFT;
-		else
-			ani = KOOPAS_ANI_PARA_RIGHT;
+	if (state != KOOPAS_STATE_DEATH) {
+		if (tagType == KOOPAS_GREEN_PARA)
+			if (this->nx < 0)
+				ani = KOOPAS_ANI_PARA_LEFT;
+			else
+				ani = KOOPAS_ANI_PARA_RIGHT;
+	}
 
 	animation_set->at(ani)->Render(x, y);
 	RenderBoundingBox();
@@ -433,6 +442,11 @@ void CKoopas::SetState(int state)
 		vx = 0;
 		nx = 1;
 		StartShell();
+		break;
+	case KOOPAS_STATE_DEATH:
+		y += KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT + 1;
+		vx = 0;
+		vy = 0;
 		break;
 	}
 }

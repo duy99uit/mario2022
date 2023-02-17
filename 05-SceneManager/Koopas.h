@@ -34,6 +34,7 @@
 
 #define KOOPAS_GRAVITY					0.002f
 #define KOOPAS_PARA_GRAVITY				0.001f
+#define KOOPAS_STATE_DEATH				500
 
 class CKoopas : public CGameObject
 {

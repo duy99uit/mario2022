@@ -21,6 +21,8 @@
 #include "Card.h"
 #include "FireBullet.h"
 #include "Switch.h"
+#include "Point.h"
+#include "PlayScene.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -155,6 +157,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 				goomba->SetTagType(GOOMBA_RED_NORMAL);
 			}
 			else {
+				InitScore(this->x, this->y, 100);
 				goomba->SetState(GOOMBA_STATE_DIE);
 			}
 			vy = -MARIO_JUMP_DEFLECT_SPEED_GB; // mario jump a little bit when collision with goomba red
@@ -179,7 +182,23 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 	if (ny != 0 || nx != 0) {
 		e->obj->Delete();
 		coin++;
+		InitScore(this->x, this->y, 100, false);
 	}
+}
+
+void CMario::InitScore(float x, float y, int score, bool isStack) {
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+
+	start_time_score = GetTickCount64();
+
+	Point* point = new Point(score);
+	int previousScore = score;
+
+	point->SetPosition(x, y);
+	currentScene->AddObjectToScene(point);
+
+	this->marioScore += score;
+
 }
 
 void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
@@ -205,6 +224,7 @@ void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
 {
 	CMushroom* mushRoom = dynamic_cast<CMushroom*>(e->obj);
 	DebugOut(L"Mario OnCollisionWithMushRoom - change state - big!\n");
+	InitScore(this->x, this->y, 100);
 	e->obj->Delete();
 	
 	if (mushRoom->GetTypeMushRoom() != MUSHROOM_GREEN) {
@@ -286,6 +306,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 		else if (koopas->GetState() == KOOPAS_STATE_TURNING) {
 			koopas->SetState(KOOPAS_STATE_IN_SHELL);
 		}
+		InitScore(this->x, this->y, 100);
 	}
 
 }
@@ -297,6 +318,7 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 		DebugOut(L"Mario tranform to tail \n");
 		SetLevel(MARIO_LEVEL_TAIL);
 		leaf->SetAppear(false);
+		InitScore(this->x, this->y, 1000);
 		e->obj->Delete();
 	}
 }

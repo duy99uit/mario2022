@@ -234,6 +234,7 @@ class CMario : public CGameObject
 	ULONGLONG start_running = 0;
 	ULONGLONG running_stop = 0;
 	BOOLEAN isJumping = false;
+	ULONGLONG start_time_score = 0;
 
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
@@ -290,6 +291,8 @@ public:
 	int coin;
 	int speedStack = 0;
 	int marioLife = 4;
+	int marioScore = 0;
+	void InitScore(float x, float y, int score, bool isStack = true);
 
 
 	BOOLEAN isExtraTop = false; // for tail

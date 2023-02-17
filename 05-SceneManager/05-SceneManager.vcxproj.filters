@@ -169,6 +169,9 @@
     <ClCompile Include="WorldPlayer.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h">
@@ -281,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="WorldPlayer.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
