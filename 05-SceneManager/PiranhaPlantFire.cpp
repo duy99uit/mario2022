@@ -99,7 +99,7 @@ void PiranhaPlantFire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	if (state == PIRANHAPLANT_STATE_DEATH)
 		return;
 	float mLeft, mTop, mRight, mBottom;
-	CMario* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
 	if (mario->GetLevel() == MARIO_LEVEL_TAIL) {
 		mario->tail->GetBoundingBox(mLeft, mTop, mRight, mBottom);
 

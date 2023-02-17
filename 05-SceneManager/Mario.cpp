@@ -133,6 +133,9 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		DebugOut(L"mario collision with leaf \n");
 		OnCollisionWithLeaf(e);
 	}
+	else if (dynamic_cast<CardItem*>(e->obj)) {
+		OnCollisionWithCardItem(e);
+	}
 	else if (dynamic_cast<FireBullet*>(e->obj)) {
 		
 	}
@@ -323,13 +326,19 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 	}
 }
 void CMario::OnCollisionWithCardItem(LPCOLLISIONEVENT e) {
-	CardItem* card = dynamic_cast<CardItem*>(e->obj);
+	/*CardItem* card = dynamic_cast<CardItem*>(e->obj);
 	if (e->ny != 0 || e->nx != 0) {
 		card->SetAppear(false);
 		card->isDeleted = true;
 		isFinish = true;
 		cardItemSc = card->getState();
 		DebugOut(L"get state card:: %d \n", card->getState());
+	}*/
+	CardItem* card = dynamic_cast<CardItem*>(e->obj);
+	if (e->ny != 0 || e->nx != 0) {
+		card->SetAppear(false);
+		card->isDeleted = true;
+		isFinish = true;
 	}
 }
 void CMario::OnCollisionWithFireBullet(LPCOLLISIONEVENT e) {
@@ -1123,16 +1132,19 @@ void CMario::HandleFlapping() {
 	}
 }
 
+
 void CMario::HandleFinishMap() {
+	DebugOut(L"HandleFinishMap runnign \n", isFinish); 
 	if (isFinish) {
 		ax = MARIO_ACCELERATION;
 		ay = MARIO_GRAVITY;
 		nx = 1;
 		vx = MARIO_WALKING_SPEED;
-		//DebugOut(L"Mario collision with Card and go to right - end game \n");
+		DebugOut(L"Mario collision with Card and go to right - end game \n");
 		SetState(MARIO_STATE_WALKING_RIGHT);
 	}
 }
+
 void CMario::HandleSwitchMap() {
 	if (isSitting && isSwitchMap && isPipeDown)
 	{
