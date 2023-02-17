@@ -19,6 +19,7 @@ CWorldScene::CWorldScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
 	key_handler = new CWorldSceneKeyHandler(this);
+	hud = NULL;
 }
 
 /*
@@ -256,7 +257,7 @@ void CWorldScene::Load()
 	hud = new HUD(WORLDSCENE_HUD);
 
 	CGame::GetInstance()->SetCamPos(-5, 0);
-	hud->SetPosition(130, current_map->GetMapHeight() + 10);
+	hud->SetPosition(130, current_map->GetMapHeight() + 25);
 
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }

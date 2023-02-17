@@ -339,7 +339,7 @@ void CPlayScene::Load()
 	}
 
 	f.close();
-	hud = new HUD(); // new hud
+	hud = new HUD(PLAYSCENE_HUD); // new hud
 	DebugOut(L"[INFO] Done loading scene  %s\n", sceneFilePath);
 }
 

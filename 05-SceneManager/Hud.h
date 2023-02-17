@@ -73,9 +73,14 @@ class HUD :public CGameObject {
 
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
-	HUD(int type_hud = 0);
+	HUD(int typeHud);
 	virtual void Render();
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
+
+	int GetTypeHub() {
+		DebugOut(L"type hud:: %d \n", this->typeHud);
+		return this->typeHud;
+	}
 
 	//
 	void initFonts();

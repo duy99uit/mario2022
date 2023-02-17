@@ -3,6 +3,8 @@
 #include <string>
 #include "PlayScene.h"
 #include "debug.h"
+#include "WorldScene.h"
+#include "IntroScene.h"
 
 #define HUD_DIFF_FIRST_ROW		8
 #define HUD_DIFF_SECOND_ROW		16
@@ -84,7 +86,7 @@ vector<LPSPRITE> HUD::StringToSprite(string str)
 	return sprites;
 }
 
-HUD::HUD(int typeHUD) {
+HUD::HUD(int typeHud) {
 	initFonts();
 	PAni = CAnimations::GetInstance()->Get(ANI_P_ID);
 	for (unsigned int i = 0; i < MARIO_RUNNING_STACKS - 1; i++) {
@@ -95,13 +97,19 @@ HUD::HUD(int typeHUD) {
 void HUD::Render() {
 	// for hub
 	CSprites::GetInstance()->Get(SPRITE_HUD_ID)->Draw(x, y - 7);
+	if (typeHud == WORLDSCENE_HUD) {
+		DebugOut(L"Type Hud for world scene:: %d \n", GetTypeHub());
+	}
+	else if (typeHud == PLAYSCENE_HUD) {
+		DebugOut(L"Type Hud for play scene :: %d \n", GetTypeHub());
+	}
 	// for running stack
 	for (int i = 1; i <= speedStack; i++) {
 		if (i == MARIO_RUNNING_STACKS) {
 			if (PAni != nullptr)
 				PAni->Render(x + HUD_DIFF_P, y - HUD_DIFF_ROW - 7);
 		}
-		else
+		else if (i <= 6)
 		{
 			powerMelterSprite[i - 1]->Draw(x + FONT_BBOX_WIDTH * (i - 1) - HUD_DIFF_METTER + HUD_DIFF_MELTER, y - 11);
 		}

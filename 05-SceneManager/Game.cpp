@@ -466,7 +466,7 @@ void CGame::_ParseSection_SCENES(string line)
 		LPSCENE worldscene = new CWorldScene(id, path);
 		scenes[id] = worldscene;
 	}
-	if (id == 1)
+	if (id == 1 || id == 2)
 	{
 		LPSCENE playscene = new CPlayScene(id, path);
 		scenes[id] = playscene;

@@ -46,7 +46,7 @@ public:
 	// for handle QBrick leaf
 	int state; // for qBrick state
 
-
+	int typeHud; // define for hud tag
 	int tagType = 0; // define for goomba tag
 	int z = 0;
 
