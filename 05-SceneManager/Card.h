@@ -19,7 +19,7 @@
 class CardItem : public CGameObject
 {
 private:
-	DWORD start = 0;
+	ULONGLONG start = 0;
 	bool isAppear = true;
 public:
 	int state = 0;

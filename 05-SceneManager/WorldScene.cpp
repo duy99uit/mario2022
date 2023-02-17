@@ -155,7 +155,7 @@ void CWorldScene::_ParseSection_OBJECTS(string line)
 			cgUp = atof(tokens[6].c_str());
 			cgRight = atof(tokens[7].c_str());
 			cgDown = atof(tokens[8].c_str());
-			int sceneid = atof(tokens[9].c_str());
+			double  sceneid = atof(tokens[9].c_str());
 			obj = new CWorldMapObject(sceneid);
 			((CWorldMapObject*)obj)->SetMove(cgLeft, cgUp, cgRight, cgDown);
 			obj->SetTagType(tag);

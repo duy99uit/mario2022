@@ -289,6 +289,8 @@ public:
 	// hud
 	int coin;
 	int speedStack = 0;
+	int marioLife = 4;
+
 
 	BOOLEAN isExtraTop = false; // for tail
 	int cardItemSc;
@@ -325,7 +327,7 @@ public:
 	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable == 0); }
 
 	// handle camera update when fly
-	int GetY() {
+	float  GetY() {
 		return this->y;
 	}
 	boolean getIsOnPlatForm() { return isOnPlatform; }

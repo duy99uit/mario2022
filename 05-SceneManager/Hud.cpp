@@ -92,6 +92,7 @@ HUD::HUD(int typeHud) {
 	for (unsigned int i = 0; i < MARIO_RUNNING_STACKS - 1; i++) {
 		powerMelterSprite.push_back((CSprites::GetInstance()->Get(SPRITE_FILLARROW_ID)));
 	}
+	playerSprite = CSprites::GetInstance()->Get(SPRITE_ICONMARIO_ID);
 }
 
 void HUD::Render() {
@@ -123,6 +124,12 @@ void HUD::Render() {
 	for (unsigned int i = 0; i < remainTimeSprites.size(); i++) {
 		remainTimeSprites[i]->Draw(x + FONT_BBOX_WIDTH * i + HUD_DIFF_TIME + HUD_DIFF_MELTER - 1, y + HUD_DIFF_ROW - 7);
 	}
+	// for mario life
+	for (unsigned int i = 0; i < mariolifeSprites.size(); i++)
+		mariolifeSprites[i]->Draw(x + FONT_BBOX_WIDTH * i - HUD_DIFF_LIFE + HUD_DIFF_MELTER - 1, y + HUD_DIFF_ROW - 7);
+
+	// for mario sprite
+	playerSprite->Draw(x - HUD_DIFF_PLAYER + HUD_DIFF_MELTER - 3, y + 4 - 7);
 }
 void HUD::AddSpeedStack() {
 	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
@@ -132,6 +139,11 @@ void HUD::AddSpeedStack() {
 void HUD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	AddSpeedStack();
 	AddCoin();
+
+	AddLife();
+
+	// for mario life
+	mariolifeSprites = StringToSprite(to_string(marioLife));
 	// for coin
 	moneySprites = StringToSprite(to_string(money));
 
@@ -145,4 +157,9 @@ void HUD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 void HUD::AddCoin() {
 	if (mario != NULL)
 		this->money = mario->coin;
+}
+
+void HUD::AddLife() {
+	if (mario != NULL)
+		this->marioLife = mario->marioLife;
 }
